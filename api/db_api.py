@@ -1,5 +1,4 @@
 import os
-import json
 import mysql.connector
 from dotenv import load_dotenv
 
@@ -28,9 +27,8 @@ class DB:
     def __init__(self):
         self.connection = db_connection(HOST, USER, PASSWORD, 'Fitness')
     
-    def db_get(self):
+    def db_get(self, query):
         cursor = self.connection.cursor()
-        cursor.execute("SELECT * FROM Exercise")
+        cursor.execute(query)
         myresult = cursor.fetchall()
-        result = json.dumps(myresult)
-        return result
+        return myresult

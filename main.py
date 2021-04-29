@@ -1,16 +1,13 @@
 from bottle import request, response
 from bottle import post, get, put, delete
 from bottle import Bottle, run
-import api.db_api as sql
+from api import fetcher
 
 app = Bottle()
-db = sql.DB()
 
 @app.route('/api/exercise')
-def hello():
-    result = db.db_get()
-    print(result)
-    return result
+def fetch():
+    return fetcher.get_all()
 
 # @put('/names/<name>')
 # def update_handler(name):
