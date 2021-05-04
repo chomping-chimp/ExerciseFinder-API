@@ -6,7 +6,7 @@ from api import fetcher
 
 app = Bottle()
 
-@app.route('/api/exercise')
+@app.route('/api/allExercise')
 def fetch():
     data = fetcher.get_all()
     response.headers['Content-Type'] = 'application/json'
