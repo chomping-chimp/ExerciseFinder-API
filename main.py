@@ -1,33 +1,40 @@
-import bottle
-from bottle import request, response
-from bottle import post, get, put, delete
-from bottle import Bottle, run
 import json
+from flask import Flask, request, jsonify, make_response
+from flask import Response
 from api import fetcher
 
-btl = Bottle()
+app = Flask(__name__)
 
-@btl.route('/api/allExercise')
-def fetch():
-    data = fetcher.get_all()
-    response.headers['Content-Type'] = 'application/json'
-    response.headers['Access-Control-Allow-Origin'] = '*'
-    response.headers['Access-Control-Allow-Credentials'] = 'GET, POST, OPTIONS'
-    response.headers['Access-Control-Allow-Headers'] = 'Origin, Content-Type, Accept'
-    return json.dumps({'data': data})
+@app.route('/exercise/getAll', methods=['GET'])
+def respond():
+    # data = fetcher.get_all()
+    resp = make_response(json.dumps({'data': fetcher.get_all()}))
+    resp.headers['Content-Type'] = 'application/json'
+    resp.headers['Access-Control-Allow-Origin'] = '*'
+    resp.headers['Access-Control-Allow-Credentials'] = 'GET, POST, OPTIONS'
+    resp.headers['Access-Control-Allow-Headers'] = 'Origin, Content-Type, Accept'
+    return resp
+# @app.route('/post/', methods=['POST'])
+# def post_something():
+#     param = request.form.get('name')
+#     print(param)
+#     # You can add the test cases you made in the previous function, but in our case here you are just testing the POST functionality
+#     if param:
+#         return jsonify({
+#             "Message": f"Welcome {name} to our awesome platform!!",
+#             # Add this option to distinct the POST request
+#             "METHOD" : "POST"
+#         })
+#     else:
+#         return jsonify({
+#             "ERROR": "no name found, please send a name."
+#         })
 
-# @put('/names/<name>')
-# def update_handler(name):
-#     '''Handles name updates'''
-#     pass
+# A welcome message to test our server
+@app.route('/')
+def index():
+    return "<h1>Welcome to our server !!</h1>"
 
-# @delete('/names/<name>')
-# def delete_handler(name):
-#     '''Handles name deletions'''
-#     pass
-
-# these two lines are only used for python app.py
 if __name__ == '__main__':
-    run(btl, host='localhost', port=8080, debug=True, reloader=True)
-# this is the hook for Gunicorn to run Bottle
-app = bottle.default_app()
+    # Threaded option to enable multiple instances for multiple user access support
+    app.run(threaded=True, port=5000)
