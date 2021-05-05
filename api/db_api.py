@@ -1,11 +1,13 @@
 import os
 import mysql.connector
-from dotenv import load_dotenv
-
-load_dotenv()
-HOST = os.getenv('HOST')
-USER = os.getenv('USER')
-PASSWORD = os.getenv('PASSWORD')
+# from dotenv import load_dotenv
+# load_dotenv()
+# HOST = os.getenv('HOST')
+# USER = os.getenv('USER')
+# PASSWORD = os.getenv('PASSWORD')
+HOST="database-1.cvx9i8jjc80m.us-east-2.rds.amazonaws.com"
+USER="admin"
+PASSWORD="awsSql0132"
 
 def db_connection(host_name, user_name, user_password, db_name):
     connection = None
