@@ -4,7 +4,7 @@ from bottle import Bottle, run
 import json
 from api import fetcher
 
-bottle = Bottle()
+btl = Bottle()
 def app():
     @app.route('/api/allExercise')
     def fetch():
@@ -29,4 +29,4 @@ def app():
     # def creation_handler():
     #     '''Handles name creation'''
     #     pass
-run(bottle, host='localhost', port=8080, server='gunicorn', fast=True)
+run(btl, host='localhost', port=8080, server='gunicorn', fast=True)
