@@ -7,13 +7,23 @@ app = Flask(__name__)
 
 @app.route('/exercise/getAll', methods=['GET'])
 def respond():
-    # data = fetcher.get_all()
     resp = make_response(json.dumps({'data': fetcher.get_all()}))
     resp.headers['Content-Type'] = 'application/json'
     resp.headers['Access-Control-Allow-Origin'] = '*'
     resp.headers['Access-Control-Allow-Credentials'] = 'GET, POST, OPTIONS'
     resp.headers['Access-Control-Allow-Headers'] = 'Origin, Content-Type, Accept'
     return resp
+
+# @app.route('/exercise/getAll', methods=['GET'])
+# def respond():
+#     resp = make_response(json.dumps({'data': fetcher.get_all()}))
+#     resp.headers['Content-Type'] = 'application/json'
+#     resp.headers['Access-Control-Allow-Origin'] = '*'
+#     resp.headers['Access-Control-Allow-Credentials'] = 'GET, POST, OPTIONS'
+#     resp.headers['Access-Control-Allow-Headers'] = 'Origin, Content-Type, Accept'
+#     return resp
+# Need to look into 
+
 # @app.route('/post/', methods=['POST'])
 # def post_something():
 #     param = request.form.get('name')
@@ -30,7 +40,6 @@ def respond():
 #             "ERROR": "no name found, please send a name."
 #         })
 
-# A welcome message to test our server
 @app.route('/')
 def index():
     return "<h1>Welcome to our server !!</h1>"
