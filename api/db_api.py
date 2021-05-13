@@ -5,6 +5,7 @@ import mysql.connector
 HOST = os.environ.get('HOST')
 USER = os.environ.get('USER')
 PASSWORD = os.environ.get('PASSWORD')
+# Need to toggle the dotenv import between the dev and prod env
 
 def db_connection(host_name, user_name, user_password, db_name):
     connection = None
@@ -18,7 +19,6 @@ def db_connection(host_name, user_name, user_password, db_name):
         print("MySQL Database connection successful")
     except:
         print(f"[DEBUG] - Error connecting to Database")
-
     return connection
 
 class DB:
