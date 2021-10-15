@@ -6,7 +6,7 @@ db = db_api.DB()
 Function to get all Exercises from DB
 '''
 def get_all():
-    query = "SELECT * FROM Fitness.AllExercises"
+    query = "SELECT * FROM Fitness.Exercises"
     result = db.db_get(query)
     return result
 
