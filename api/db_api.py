@@ -1,7 +1,7 @@
 import os
 import mysql.connector
-# from dotenv import load_dotenv
-# load_dotenv()
+from dotenv import load_dotenv
+load_dotenv()
 HOST = os.environ.get('HOST')
 USER = os.environ.get('USER')
 PASSWORD = os.environ.get('PASSWORD')
@@ -24,10 +24,12 @@ def db_connection(host_name, user_name, user_password, db_name):
 class DB:
 
     def __init__(self):
-        self.connection = db_connection(HOST, USER, PASSWORD, 'Fitness')
+        pass
     
     def db_get(self, query):
-        cursor = self.connection.cursor()
+        connection = db_connection(HOST, USER, PASSWORD, 'Fitness')
+        cursor = connection.cursor()
         cursor.execute(query)
         myresult = cursor.fetchall()
+        connection.close()
         return myresult
