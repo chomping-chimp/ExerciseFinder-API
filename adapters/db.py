@@ -61,3 +61,5 @@ class DB:
                 query_result = cursor.fetchall()
 
         return query_result
+    # Will need to make one for updating
+    # Will need to make one for creating new exercises
