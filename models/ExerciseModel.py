@@ -1,11 +1,10 @@
 from adapters import db
-from enum import Enum
+from .helpers.EnumClasses import Filters
 
-class Exercise:
+class ExerciseModel:
     
     def __init__(self):
         self.db = db.DB()
-        self.Filters = Enum('Filters', 'category difficulty equipment exerciseName family primaryTargets subFamily')
 
     def create_new_exercise(self):
         pass
@@ -17,12 +16,7 @@ class Exercise:
     
     def get_exercise_by_filter(self, filter_term):
         is_valid_filter = False
-        for filters in self.Filters:
-            if filter_term != filters.name:
-                continue
-            else:
-                is_valid_filter = True
-                break
+        filter = Filters.get_member_key(filter_term)
         #splitList = filterList.split('%')
         # if (len(splitList) == 1):
         #     filters = splitList[0]
