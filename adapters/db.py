@@ -9,7 +9,7 @@ class DB:
     def __init__(self, db_name='Fitness'):
         load_dotenv()
         self.HOST = os.environ.get('HOST')
-        #self.USER = os.environ.get('USERNAME')
+        # self.USER = os.environ.get('USERNAME')
         self.USER = os.environ.get('USER')
         self.PASSWORD = os.environ.get('PASSWORD')
 
@@ -35,7 +35,7 @@ class DB:
             )
             self.logger.info("MySQL Database connection successful")
         except:
-            self.logger.warn("[DEBUG] - Error connecting to Database")
+            self.logger.warning("[DEBUG] - Error connecting to Database")
 
         return connection
 
@@ -49,7 +49,7 @@ class DB:
         Returns:
             [list]: List of results
         """
-        connection = self.create_connection(self.db)
+        connection = self.create_connection()
         with connection as db:
             # Add dictionary flag so results are retured in key value pairs
             cursor = db.cursor(dictionary=True)
@@ -61,3 +61,5 @@ class DB:
                 query_result = cursor.fetchall()
 
         return query_result
+    # Will need to make one for updating
+    # Will need to make one for creating new exercises
