@@ -1,18 +1,22 @@
-from adapters import db
-from .helpers.EnumClasses import Filters
 
-class ExerciseModel:
-    
-    def __init__(self):
-        self.db = db.DB()
+from .helpers.EnumClasses import Filters
+from .BaseModel import BaseModel
+
+class ExerciseModel(BaseModel):
 
     def create_new_exercise(self):
         pass
     
     def get_all_exercises(self):
         query = "SELECT * FROM Fitness.Exercises"
-        result = self.db.db_get(query)
-        return result
+        result = None
+
+        with self.db() as connection:
+            cursor = connection.cursor()
+            cursor.execute(query)
+
+            result = cursor.fetchall()
+            return result
     
     def get_exercise_by_filter(self, filter_term):
         is_valid_filter = False
@@ -28,5 +32,17 @@ class ExerciseModel:
         # return result
         pass
     
-    def __get_exercise_by_name(self, name, strict=False):
-        pass
+    def get_exercise_by_name(self, name, strict=False):
+        result = None
+
+        if strict:
+            query = "SELECT * FROM Fitness.Exercises WHERE exerciseName = '%s'" %name
+        else:
+            query = f"SELECT * FROM Fitness.Exercises WHERE exerciseName LIKE '%{name}%'"
+
+        with self.db() as connection:
+            cursor = connection.cursor()
+            cursor.execute(query)
+
+            result = cursor.fetchall()
+            return result
