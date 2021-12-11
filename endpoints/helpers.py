@@ -31,4 +31,12 @@ class RequestHelper:
             response.headers['Access-Control-Allow-Credentials'] = methods
         # Return headers
         return response
+    
+    def create_response_meta(self, data):
+
+        total_count = len(data)
+
+        return {
+            "Total Results": total_count
+        }
 
