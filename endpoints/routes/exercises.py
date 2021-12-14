@@ -22,8 +22,8 @@ Route to get all exercises
 def respond():
 
     exercise_model = ExerciseModel()
-    exercises = exercise_model.get_all_exercises()
-    metadata = response.create_response_meta(exercises)
+    exercises, status = exercise_model.get_all_exercises()
+    metadata = response.create_response_meta(exercises, status)
 
     resp = make_response(
         {
@@ -42,8 +42,8 @@ def get_one():
     exact = eval(request.args.get('exact', ''))
 
     exercise_model = ExerciseModel()
-    exercises = exercise_model.get_exercise_by_name(name, strict=exact)
-    metadata = response.create_response_meta(exercises)
+    exercises, status = exercise_model.get_exercise_by_name(name, strict=exact)
+    metadata = response.create_response_meta(exercises, status)
 
     resp = make_response(
         {
