@@ -60,9 +60,17 @@ WORK IN PROGRESS ------
 '''
 @exercise.route('/exercise/filter', methods=['GET'])
 def filterData():
-    filters = request.args.get('filters', '')
-    resp = make_response({'data': filters})
+    filters = request.args
+
+    exercise_model = ExerciseModel()
+    exercises, status = exercise_model.get_exercise_by_filter(filter_term=filters)
+    metadata = response.create_response_meta(exercises, status)
+
+    resp = make_response(
+        {
+            'metadata': metadata,
+            'data': exercises
+        }
+    )
     resp = response.create_request_headers(resp)
-    #resp['data'] = json.dumps(fetcher.get_all())
-    #resp = make_response(json.dumps({'data': fetcher.filterGroups(filters)}))
     return resp

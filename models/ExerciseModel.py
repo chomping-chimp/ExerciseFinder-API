@@ -18,19 +18,30 @@ class ExerciseModel(BaseModel):
             return result
     
     def get_exercise_by_filter(self, filter_term):
-        is_valid_filter = False
-        filter = Filters.get_member_key(filter_term)
-        #splitList = filterList.split('%')
-        # if (len(splitList) == 1):
-        #     filters = splitList[0]
-        #     query = ("SELECT * FROM Fitness.AllExercises WHERE `Primary Muscle` = '{}'".format(filters))
-        # else:
-        #     filters = tuple(splitList)
-        #     query = ("SELECT * FROM Fitness.AllExercises WHERE `Primary Muscle` IN {}".format(filters))
-        # result = db.db_get(connection, query)
-        # return result
-        pass
-    
+        search_query = []
+        try:
+
+            for key, value in filter_term.items():
+                filter_name = Filters.get_member_key(key)
+                if filter_name:
+                    search_query.append(f"({key} = \'{value}\')")
+                else:
+                    raise Exception("Invalid search term provided")
+                
+            search_terms = " AND ".join(search_query)
+            query = "SELECT * from Fitness.Exercises WHERE %s" %search_terms
+
+            with self.db() as connection:
+                cursor = connection.cursor()
+                cursor.execute(query)
+
+                result = cursor.fetchall()
+                status = 200
+                return result, status
+        except:
+            status = 404
+            return None, status
+
     def get_exercise_by_name(self, name, strict=False):
         result = None
 

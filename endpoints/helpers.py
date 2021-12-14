@@ -32,11 +32,24 @@ class RequestHelper:
         # Return headers
         return response
     
-    def create_response_meta(self, data):
+    def create_response_meta(self, data, status):
+        """
+        Method that creates metadata information for the response
 
-        total_count = len(data)
+        Args:
+            data (list): Data to be returned from endpoint
+            status (int): Status of operation
+
+        Returns:
+            (dict): Collection of metadata information
+        """
+        total_count = 0
+
+        if data:
+            total_count = len(data)
 
         return {
-            "Total Results": total_count
+            "Total Results": total_count,
+            "Status": status
         }
 
