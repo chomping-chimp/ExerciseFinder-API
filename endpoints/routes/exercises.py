@@ -17,6 +17,7 @@ def index():
 '''
 Route to get all exercises 
 '''
+
 @exercise.route('/exercise/get-all', methods=['GET'])
 def respond():
 

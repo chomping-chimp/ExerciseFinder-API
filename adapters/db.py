@@ -10,7 +10,7 @@ class DB:
     def __init__(self):
         load_dotenv()
         self.HOST = os.environ.get('HOST')
-        #self.USER = os.environ.get('USERNAME')
+        # self.USER = os.environ.get('USERNAME')
         self.USER = os.environ.get('USER')
         self.PASSWORD = os.environ.get('PASSWORD')
         self.db = 'Fitness'
