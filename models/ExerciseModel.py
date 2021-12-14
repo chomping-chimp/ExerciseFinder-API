@@ -16,7 +16,8 @@ class ExerciseModel(BaseModel):
             cursor.execute(query)
 
             result = cursor.fetchall()
-            return result
+            status = 200
+            return result, status
     
     def get_exercise_by_filter(self, filter_term):
         search_query = []
@@ -56,4 +57,5 @@ class ExerciseModel(BaseModel):
             cursor.execute(query)
 
             result = cursor.fetchall()
-            return result
+            status = 200
+            return result, status
