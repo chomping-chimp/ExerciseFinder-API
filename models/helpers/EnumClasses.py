@@ -19,5 +19,5 @@ class Filters(Enum):
         if key:
             return key
         else:
-            raise Exception("Key not found in Enum")
+            return False
 
