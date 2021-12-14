@@ -51,4 +51,5 @@ class RequestHelper:
         return {
             "Total Results": total_count,
             "Status": status
+        }
 
