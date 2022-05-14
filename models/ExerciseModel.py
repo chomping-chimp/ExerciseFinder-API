@@ -22,7 +22,6 @@ class ExerciseModel(BaseModel):
     def get_exercise_by_filter(self, filter_term):
         search_query = []
         try:
-
             for key, value in filter_term.items():
                 filter_name = Filters.get_member_key(key)
                 if filter_name:
@@ -47,8 +46,8 @@ class ExerciseModel(BaseModel):
     def get_exercise_by_name(self, name, strict=False):
         result = None
 
-        if strict:
-            query = "SELECT * FROM Fitness.Exercises WHERE exerciseName = '%s'" %name
+        if eval(strict):
+            query = "SELECT * FROM Fitness.Exercises WHERE exerciseName = '%s'"%name
         else:
             query = f"SELECT * FROM Fitness.Exercises WHERE exerciseName LIKE '%{name}%'"
 
