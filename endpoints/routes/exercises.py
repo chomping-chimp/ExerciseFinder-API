@@ -1,7 +1,6 @@
-import json
 from models.ExerciseModel import ExerciseModel
 from endpoints.helpers import RequestHelper
-from flask import Flask, helpers, request, make_response, Blueprint, render_template
+from flask import request, make_response, Blueprint, render_template
 
 exercise = Blueprint('exercise', __name__)
 response = RequestHelper()
@@ -17,7 +16,6 @@ def index():
 '''
 Route to get all exercises 
 '''
-
 @exercise.route('/exercise/get-all', methods=['GET'])
 def respond():
 
