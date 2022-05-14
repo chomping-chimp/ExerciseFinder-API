@@ -1,9 +1,30 @@
-from adapters.db import DB
+import logging
+from adapters.db import Database
 
-class BaseModel:
+logging.basicConfig(level = logging.INFO)
+
+class BaseModel(object):
 
     def __init__(self):
-        pass
+        self.db = Database
+        self.logger = logging.getLogger("base_logger")
     
-    def db(self, dictionary=False):
-        return DB()
+    def execute(self, query, args=None):
+
+        with Database() as cursor:
+            cursor.execute(query, args)
+
+    def fetch_all(self, query, args=None):
+        
+        with Database() as cursor:
+            cursor.execute(query, args)
+            result = cursor.fetchall()
+        return result
+
+    def fetch_one(self, query, args=None):
+        
+        with Database() as cursor:
+            cursor.execute(query, args)
+            result = cursor.fetchone()
+        return result
+

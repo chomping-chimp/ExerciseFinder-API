@@ -52,4 +52,8 @@ class RequestHelper:
             "Total Results": total_count,
             "Status": status
         }
+    
+    @staticmethod
+    def default_json(t):
+        return f'{t}'
 
