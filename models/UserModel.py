@@ -19,14 +19,13 @@ class UserModel(BaseModel):
 
         user_id = self.get_user_id()['id']
         data = self.fetch_all("""
-        SELECT SUM(log.active_minutes) activity, usr.username, date(create_time) date
+        SELECT usr.username, sum(log.active_minutes) total_activity, count(log.id) total_records
         FROM scoreboard_log log
         JOIN scoreboard_users usr ON usr.id = log.user_id AND log.user_id = %s
-        GROUP BY day(create_time);
         """, (user_id,))
         
         for dic in data:
-            dic['activity'] = RequestHelper.default_json(dic['activity'])
+            dic['total_activity'] = RequestHelper.default_json(dic['total_activity'])
             del dic['username']
 
         return data
