@@ -69,7 +69,7 @@ def getScoreboard():
 
     timeframe = request.args.get('timeframe', '')
     group_model = GroupModel()
-    data, meta = group_model.get_temp_scoreboard(timeframe)
+    data, meta = group_model.get_scoreboard(timeframe)
     resp = make_response({'data': data, 'metadata': meta})
     # Add response headers
     resp = response.create_request_headers(resp)
