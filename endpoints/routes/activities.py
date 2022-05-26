@@ -67,12 +67,14 @@ Get Scoreboard - TEMP ENDPOINT see below
 @activity.route('/activity/scoreboard', methods=['GET'])
 def getScoreboard():
 
+    timeframe = request.args.get('timeframe', '')
     group_model = GroupModel()
-    data, meta = group_model.get_temp_scoreboard()
+    data, meta = group_model.get_temp_scoreboard(timeframe)
     resp = make_response({'data': data, 'metadata': meta})
     # Add response headers
     resp = response.create_request_headers(resp)
     return resp
+
 
 # TODO: Create endpoints for groups
 # NOTE: Once created, users will only be able to see the scoreboard for the group they are in
