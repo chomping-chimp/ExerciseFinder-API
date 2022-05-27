@@ -28,7 +28,7 @@ class GroupModel(BaseModel):
                 SELECT usr.username, SUM(log.active_minutes) activity, log.create_time date
                 FROM scoreboard_log log
                 JOIN scoreboard_users usr ON usr.id = log.user_id
-                WHERE log.create_time = DAY(NOW())
+                WHERE log.create_time <= NOW() AND log.create_time >= NOW() - INTERVAL 12 hour
                 GROUP BY DAY(create_time), usr.username;
             """
         elif timeframe == "week":
