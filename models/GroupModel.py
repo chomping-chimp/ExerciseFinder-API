@@ -23,13 +23,10 @@ class GroupModel(BaseModel):
     def get_scoreboard(self, timeframe=None):
         
         where_clause = ""
-        group_clause = ""
         if timeframe == "day":
             where_clause = "WHERE log.create_time <= NOW() AND log.create_time >= NOW() - INTERVAL 12 hour"
-            group_clause = "GROUP BY DAY(create_time), usr.username"
         elif timeframe == "week":
             where_clause = "WHERE log.create_time <= NOW() AND log.create_time >= NOW() - INTERVAL 7 day"
-            group_clause = "GROUP BY DAY(create_time), usr.username"
         else:
             pass
 
@@ -38,7 +35,7 @@ class GroupModel(BaseModel):
             FROM scoreboard_log log
             JOIN scoreboard_users usr ON usr.id = log.user_id
             {where_clause}
-            {group_clause}
+            GROUP BY usr.username
             ORDER BY activity desc
         """
         result = self.fetch_all(query)
