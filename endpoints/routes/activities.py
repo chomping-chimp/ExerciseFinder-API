@@ -3,27 +3,36 @@ import sys
 from models.UserModel import UserModel
 from models.GroupModel import GroupModel
 from endpoints.helpers import RequestHelper
-from flask import request, jsonify, make_response, Blueprint
+from flask import request, make_response, Blueprint
 
 activity = Blueprint('activity', __name__)
 response = RequestHelper()
 
-'''
-Get User Data from username
-'''
 @activity.route('/activity/user/<username>', methods=['GET'])
 def getUser(username):
+    """
+    Return user data for user specified
+
+    Args:
+        username (str): Username of account
+
+    Returns:
+        dict ex.
+    """
     user_data = UserModel(username).get_user()
     resp = make_response({'data': user_data})
     # Add response headers
     resp = response.create_request_headers(resp)
     return resp
 
-'''
-Register new user
-'''
 @activity.route('/activity/user/create', methods=['POST'])
 def createUser():
+    """
+    Create a new user from string provided
+
+    Returns:
+        dict : Status of POST request
+    """
     data = request.get_json(force=True)
     username = data.get('username')
     result, status = UserModel().create_new_user(username)
@@ -32,11 +41,17 @@ def createUser():
     resp = response.create_request_headers(resp)
     return resp
 
-'''
-Log activity
-'''
 @activity.route('/activity/user/<username>/log-activity', methods=['POST'])
 def logActivity(username):
+    """
+    Record activity in activity log
+
+    Args:
+        username (str): Username of account to log record for.
+
+    Returns:
+        dict : Status of POST request
+    """
     # Get data from headers
     data = request.get_json()
     minutes = data.get('minutes')

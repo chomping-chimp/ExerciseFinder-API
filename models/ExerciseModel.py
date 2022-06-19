@@ -7,6 +7,7 @@ class ExerciseModel(BaseModel):
         super(BaseModel, self).__init__()
 
     def create_new_exercise(self):
+        # TODO: Create POST endpoint to handle individual exercise creation
         pass
     
     def get_all_exercises(self):

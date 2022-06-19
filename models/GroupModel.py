@@ -36,7 +36,7 @@ class GroupModel(BaseModel):
             JOIN scoreboard_users usr ON usr.id = log.user_id
             {where_clause}
             GROUP BY usr.username
-            ORDER BY activity desc
+            ORDER BY activity DESC
         """
         result = self.fetch_all(query)
         user_list = []
