@@ -10,8 +10,8 @@ class Database:
 
     def __init__(self):
         load_dotenv()
-        self.HOST = os.environ.get('HOST')
-        self.USER = os.environ.get('USER')
+        self.HOST = os.environ.get('HOSTNAME')
+        self.USER = os.environ.get('USERNAME')
         self.PASSWORD = os.environ.get('PASSWORD')
         self.db = 'Fitness'
 
@@ -22,7 +22,12 @@ class Database:
             "database": self.db
         }
         self._conn = mysql.connector.connect(**self.config)
-        self._cursor = self._conn.cursor(dictionary=True)
 
-    def get_connection(self):
-        return self._conn.cursor()
+    def get_connection(self, cursor_type=None):
+        
+        if not cursor_type:
+            cursor = False
+        else:
+            cursor = True
+
+        return self._conn.cursor(dictionary=cursor)

@@ -9,6 +9,6 @@ class BaseModel(object):
         self.db_conn = Database()
         self.logger = logging.getLogger("base_logger")
     
-    def db(self):
-        return self.db_conn.get_connection()
+    def db(self, cursor=None):
+        return self.db_conn.get_connection(cursor)
 
