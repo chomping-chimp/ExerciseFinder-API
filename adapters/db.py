@@ -10,9 +10,9 @@ class Database:
 
     def __init__(self):
         load_dotenv()
-        self.HOST = os.environ.get('HOSTNAME')
-        self.USER = os.environ.get('USERNAME')
-        self.PASSWORD = os.environ.get('PASSWORD')
+        self.HOST = os.environ.get('DB_HOST')
+        self.USER = os.environ.get('DB_USER')
+        self.PASSWORD = os.environ.get('DB_PASSWORD')
         self.db = 'Fitness'
 
         self.config = {
