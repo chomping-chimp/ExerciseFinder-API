@@ -29,21 +29,23 @@ class GroupModel(BaseModel):
             where_clause = "WHERE log.create_time <= NOW() AND log.create_time >= NOW() - INTERVAL 7 day"
         else:
             pass
-
-        query = f"""
-            SELECT usr.username, SUM(log.active_minutes) activity, MAX(log.create_time) date
-            FROM scoreboard_log log
-            JOIN scoreboard_users usr ON usr.id = log.user_id
-            {where_clause}
-            GROUP BY usr.username
-            ORDER BY activity DESC
-        """
-        result = self.fetch_all(query)
+        
+        with self.db() as cursor:
+            cursor.execute(f"""
+                SELECT usr.username, SUM(log.active_minutes) activity, MAX(log.create_time) date
+                FROM scoreboard_log log
+                JOIN scoreboard_users usr ON usr.id = log.user_id
+                {where_clause}
+                GROUP BY usr.username
+                ORDER BY activity DESC
+            """)
+            result = cursor.fetchall()
+            
         user_list = []
-        for dic in result:
-            dic['activity'] = RequestHelper.default_json(dic['activity'])
-            if dic['username'] not in user_list:
-                user_list.append(dic['username'])
+        for row in result:
+            row['activity'] = RequestHelper.default_json(row['activity'])
+            if row['username'] not in user_list:
+                user_list.append(row['username'])
 
         meta = {
             'count': len(result),
