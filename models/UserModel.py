@@ -12,8 +12,6 @@ class UserModel(BaseModel):
         self.is_created = True if username else False
 
     def get_user_stats(self):
-        # TODO: Create better data output for this part
-        # Could split into avg minutes per day/week/month, most active day
         if not self.is_created:
             return 404
 

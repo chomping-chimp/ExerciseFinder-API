@@ -12,7 +12,7 @@ class ExerciseModel(BaseModel):
     
     def get_all_exercises(self):
 
-        with self.db() as cursor:
+        with self.db('dict') as cursor:
             cursor.execute("SELECT * FROM Fitness.Exercises")
             result = cursor.fetchall()
 

@@ -6,7 +6,6 @@ class GroupModel(BaseModel):
     def __init__(self, username=None, group_name=None):
         super(BaseModel, self).__init__()
         self.username = username
-        # Likely need to init UserModel eventually
         self.group_name = group_name
         self.is_created = True if group_name else False
 

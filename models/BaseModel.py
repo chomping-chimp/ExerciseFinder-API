@@ -10,5 +10,8 @@ class BaseModel(object):
         self.logger = logging.getLogger("base_logger")
     
     def db(self, cursor=None):
-        return self.db_conn.get_connection(cursor)
+        try:
+            return self.db_conn.get_connection(cursor)
+        except ConnectionError as e:
+            self.logger.warning("Error connecting to DB: %s", e, exc_info=1)
 
