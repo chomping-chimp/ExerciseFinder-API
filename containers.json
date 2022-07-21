@@ -1,6 +1,6 @@
 {
     "flask": {
-        "image": ":exercise-api.app-container.18",
+        "image": ":exercise-api.app-container.19",
         "ports": {
             "5000": "HTTP"
         }
