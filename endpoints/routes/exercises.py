@@ -1,4 +1,4 @@
-from models.ExerciseModel import ExerciseModel
+from lib.models.ExerciseModel import ExerciseModel
 from endpoints.helpers import RequestHelper
 from flask import request, make_response, Blueprint, render_template
 

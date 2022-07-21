@@ -1,7 +1,7 @@
 import json
 import sys
-from models.UserModel import UserModel
-from models.GroupModel import GroupModel
+from lib.models.UserModel import UserModel
+from lib.models.GroupModel import GroupModel
 from endpoints.helpers import RequestHelper
 from flask import request, make_response, Blueprint
 

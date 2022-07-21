@@ -2,7 +2,7 @@
 import sys
 from mysqlx import IntegrityError
 from endpoints.helpers import RequestHelper
-from models.BaseModel import BaseModel
+from .BaseModel import BaseModel
 
 class UserModel(BaseModel):
 
