@@ -1,5 +1,3 @@
-import json
-import sys
 from lib.models.UserModel import UserModel
 from lib.models.GroupModel import GroupModel
 from endpoints.helpers import RequestHelper

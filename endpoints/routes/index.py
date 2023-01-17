@@ -13,10 +13,6 @@ Index/Home of Application
 def home():
     return render_template('index.html', title='Exercise API')
 
-@index.route('/form')
-def form():
-    return render_template('form.html', title='New Exercise')
-
 # Need func for getting all exercises in template
 # Need func for getting one exercise in template
 # Need func for filtering - Maybe make JS call to /api?
