@@ -11,43 +11,6 @@ class UserModel(BaseModel):
         self.username = username
         self.is_created = True if username else False
 
-    def get_user_stats(self):
-        if not self.is_created:
-            return 404
-
-        user_id = self.get_user_id()
-        with self.db('dict') as cursor:
-            cursor.execute("""
-                SELECT usr.username, sum(log.active_minutes) total_activity, count(log.id) total_records
-                FROM scoreboard_log log
-                JOIN scoreboard_users usr ON usr.id = log.user_id AND log.user_id = %s
-            """, (user_id,))
-            data = cursor.fetchall()
-        
-        for row in data:
-            row['total_activity'] = RequestHelper.default_json(row['total_activity'])
-            del row['username']
-
-        return data
-    
-    def record_activity(self, minutes):
-        # If user is not created, exit
-        if not self.is_created:
-            return 404
-        
-        try:
-            user_id = self.get_user_id()
-            # Insert record into table with ID
-            print(minutes, file=sys.stderr)
-            with self.db('dict') as cursor:
-                cursor.execute("""
-                    INSERT INTO scoreboard_log (user_id, active_minutes)
-                    VALUES (%s, %s)
-                """, (user_id, minutes))
-            return 200
-        except IntegrityError:
-            return 500
-
     def get_user(self):
         # If user is not created, return empty
         if not self.is_created:

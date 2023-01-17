@@ -1,0 +1,107 @@
+@import url('https://fonts.googleapis.com/css2?family=Libre+Franklin&display=swap');
+
+:root {
+    --blue: #1e90ff;
+    --white: #ffffff;
+
+    --class1: #22209e;
+    --class2: #fa702f;
+
+}
+/* Define Global Font */
+body {
+    background: var(--class1);
+    font-family: 'Libre Franklin', sans-serif;
+}
+
+form {
+    margin: 2em 2em 1em 1em;
+}
+footer p {
+    width: 70%;
+    margin: auto;
+    text-align: center;
+}
+.label {
+    font-size: .7em;
+}
+
+/* Navigation component */
+.nav {
+    overflow: hidden;
+    height: 3em;
+}
+/* Style Image Components */
+img {
+    max-width: 100%;
+    height: auto;
+}
+/* Font weight for paragraph elements */
+p {
+    font-weight: 300;
+}
+
+/* 
+* Work with Header elements 
+*/
+header {
+    text-align: center;
+}
+#header-img {
+    height: 5em;
+    width: auto;
+}
+.card header h1, .card header h3 {
+    padding: .5em;
+    margin: 0;
+}
+.button {
+    background-color: var(--blue);
+}
+.item:hover,
+.item:active,
+.item:focus {
+    background: #cff;
+}
+
+
+/* 
+* Universal Utility Classes 
+*/
+.center {
+    width: 70%;
+    margin: auto !important;
+    text-align: center;
+    align-items: center;
+    align-content: center;
+    justify-content: center;
+}
+.no-border {
+    border: none;
+}
+.float-card {
+    padding: 0em 2em;
+    text-align: left;
+}
+
+.class-1 {
+    background: var(--class1) !important;
+}
+.class-2 {
+    background: var(--class2) !important;
+}
+
+.compact {
+    width: 70%;
+    max-width: 15em;
+    margin: auto 30%;
+}
+
+/* 
+* Media Query for Responsive Design
+*/
+@media only screen and (max-width: 600px) {
+    .float-card {
+        text-align: center;
+    }
+}

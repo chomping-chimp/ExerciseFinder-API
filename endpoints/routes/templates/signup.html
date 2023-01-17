@@ -1,0 +1,27 @@
+{% extends "base.html" %}
+
+{% block content %}
+<div class="flex one">
+    <div class="center">
+        <h1>SIGN UP</h1>
+        <h2>Take your traning to the next level, for free!</h2>
+        <h3>Fill out the information below to create a free account</h3>
+        <form action="mailto:{{config.email}}" method="post" enctype="text/plain">
+            <fieldset class="flex one compact">
+                <div>
+                    <input type="text" name="email" placeholder="Email"/>
+                </div>
+                <div>
+                    <input type="text" name="username" placeholder="Username"/>
+                </div>
+                <div>
+                    <input type="password" name="password" placeholder="Password"/>
+                </div>
+            </fieldset>
+            <div>
+                <input type="submit" name="submit" value="Sign Up"/>
+            </div>
+        </form>
+    </div>
+</div>
+{% endblock %}
