@@ -60,8 +60,8 @@ class UserModel(BaseModel):
 
     def get_user_id(self):
         # Get user id
-        with self.db() as cursor:
+        with self.db('dict') as cursor:
             cursor.execute("SELECT user_id from dashboard_users WHERE username = %s", (self.username,))
             result = cursor.fetchone()
-        print(result)
+
         return result['user_id']
