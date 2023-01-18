@@ -1,8 +1,5 @@
-
-import sys
-from mysqlx import IntegrityError
-from endpoints.helpers import RequestHelper
 from .BaseModel import BaseModel
+from werkzeug.security import generate_password_hash, check_password_hash
 
 class UserModel(BaseModel):
 
@@ -11,33 +8,34 @@ class UserModel(BaseModel):
         self.username = username
         self.is_created = True if username else False
 
-    def get_user(self):
-        # If user is not created, return empty
-        if not self.is_created:
-            return {}
-        
+    def get_user(self, username):
+
         with self.db('dict') as cursor:
             cursor.execute("""
-                SELECT usr.username, usr.created_datetime, grp.group_name, usr.id
-                FROM scoreboard_users usr
-                LEFT JOIN scoreboard_groups grp ON grp.id = usr.group_id
-                WHERE usr.username = %s
-            """, (self.username, ))
+                SELECT * FROM dashboard_users WHERE username = %s
+            """, (username, ))
             result = cursor.fetchone()
         
-        # TODO: Can fix some of the data here later?
+        if not result:
+            return {}
+
         return result
         
-    def create_new_user(self, username):
+    def create_new_user(self, username, password, email):
 
         if self.user_exists(username):
             self.is_created = True
             self.username = username
             return {}, 300
+        
+        password_hash = generate_password_hash(password=password)
 
-        with self.db('dict') as cursor:
-            cursor.execute("INSERT INTO scoreboard_users (username) VALUES (%s)", (username, ))
-
+        with self.db() as cursor:
+            cursor.execute("""
+                INSERT INTO dashboard_users (username,password,email,date_created,last_updated) 
+                VALUES (%s, %s, %s, NOW(), NOW())
+            """, (username, password_hash, email))
+        
         self.username = username
         result = self.get_user_id()
 
@@ -47,15 +45,23 @@ class UserModel(BaseModel):
     def user_exists(self, username):
         # Check to see if user already exists in the DB
         with self.db('dict') as cursor:
-            cursor.execute("SELECT * FROM scoreboard_users WHERE username = %s", (username, ))
+            cursor.execute("SELECT * FROM dashboard_users WHERE username = %s", (username, ))
             result = cursor.fetchall()
 
         return True if result else False
 
+    def authenticate_user(self, username, password):
+        user = self.get_user(username)
+
+        username_auth = user['username'] == username
+        password_auth = check_password_hash(user['password'], password)
+
+        return password_auth and username_auth
+
     def get_user_id(self):
         # Get user id
-        with self.db('dict') as cursor:
-            cursor.execute("SELECT id from scoreboard_users WHERE username = %s", (self.username,))
+        with self.db() as cursor:
+            cursor.execute("SELECT user_id from dashboard_users WHERE username = %s", (self.username,))
             result = cursor.fetchone()
-        
-        return result['id']
+        print(result)
+        return result['user_id']
