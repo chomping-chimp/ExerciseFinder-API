@@ -10,7 +10,6 @@
 }
 /* Define Global Font */
 body {
-    background: var(--class1);
     font-family: 'Libre Franklin', sans-serif;
 }
 
@@ -92,9 +91,18 @@ header {
 }
 
 .compact {
-    width: 70%;
-    max-width: 15em;
-    margin: auto 30%;
+    width: 60%;
+    max-width: 50em;
+    margin: 0 auto;
+}
+.flex>* {
+    padding: 0;
+}
+.row {
+    background-color: #ffcb1e;
+}
+.tab-content {
+    padding: 0 1em;
 }
 
 /* 
@@ -103,5 +111,12 @@ header {
 @media only screen and (max-width: 600px) {
     .float-card {
         text-align: center;
+    }
+    .compact {
+        width: 90%;
+        max-width: 25em;
+    }
+    .tab-content {
+        padding: 0 1%;
     }
 }

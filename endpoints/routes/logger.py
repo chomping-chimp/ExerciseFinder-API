@@ -29,7 +29,7 @@ def login():
         password = request.form['password']
         is_auth = UserModel().authenticate_user(user, password)
         if is_auth:
-            return redirect(url_for('.dashboard', name = user))
+            return redirect(url_for('.dashboard'))
         else:
             return redirect(url_for('.login', name=user))
     else:
@@ -57,5 +57,10 @@ Private Endpoints for logger section
 @logger.route('/dashboard')
 def dashboard():
     variables['title'] = 'Workout Log'
-    return render_template('home.html', config=variables)
+    return render_template('dashboard.html', config=variables)
+
+@logger.route('/logout')
+def logout():
+    variables['title'] = 'Login'
+    return render_template('login.html', config=variables)
 

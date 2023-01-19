@@ -1,0 +1,35 @@
+<!-- Protected Page -->
+{% extends "base_protected.html" %}
+
+{% block content %}
+<div class="flex one compact">
+    <div class="tabs three">
+        <input id='tab-1' type='radio' name='tabgroupB' checked />
+        <label class="pseudo button toggle" for="tab-1">Log</label>
+        <input id='tab-2' type='radio' name='tabgroupB'>
+        <label class="pseudo button toggle" for="tab-2">Edit</label>
+        <input id='tab-3' type='radio' name='tabgroupB'>
+        <label class="pseudo button toggle" for="tab-3">History</label>
+        <div class="row">
+            <div class="tab-content" id="tab-1-content">
+                <p>Log a workout</p>
+                <p>Saved Routines will be listed</p>
+                <p>You can pick from one of those</p>
+            </div>
+      
+            <div>
+                <p>Edit a workout</p>
+                <p>You can edit existing ones</p>
+                <p>Or create whole new routines</p>
+            </div>
+      
+            <div>
+                <p>Workout History</p>
+                <p>This will show you all</p>
+                <p>the documented routines</p>
+                <p>and some stats</p>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

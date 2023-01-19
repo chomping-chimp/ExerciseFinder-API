@@ -1,0 +1,41 @@
+<!-- Protected Page -->
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/picnic">
+    <link href="{{ url_for('static', filename='styles/logger.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='images/barbell.png') }}" rel="icon">
+    <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
+    {% block title %}
+    <title>Workout Log</title>
+    {% endblock %}
+</head>
+<body>
+    <div class="nav"></div>
+        <nav class="demo">
+            <a href="/log" class="brand">
+                <img class="logo" src="{{ url_for('static', filename='images/barbell.png') }}" />
+                <span>Workout Log</span>
+            </a>
+        
+            <!-- responsive-->
+            <input id="bmenub" type="checkbox" class="show">
+            <label for="bmenub" class="burger pseudo button">Menu</label>
+        
+            <div class="menu">
+                <a href="/log/account" class="pseudo button item">Account</a>
+                <a href="/log/logout" class="pseudo button item">Log Out</a>
+            </div>
+        </nav>
+    </div>
+    {% block content %}
+    {% endblock %}
+</body>
+<footer>
+    <p>&copy; {{ config.footer_text }}</p>
+</footer>
+</html>
+
