@@ -12,23 +12,22 @@
 body {
     font-family: 'Libre Franklin', sans-serif;
 }
-
-form {
-    margin: 2em 2em 1em 1em;
-}
 footer p {
     width: 70%;
     margin: auto;
     text-align: center;
 }
 .label {
-    font-size: .7em;
+    font-size: 1em;
 }
 
 /* Navigation component */
 .nav {
     overflow: hidden;
     height: 3em;
+}
+.nav-bar {
+    background: var(--blue) !important;
 }
 /* Style Image Components */
 img {
@@ -62,7 +61,10 @@ header {
 .item:focus {
     background: #cff;
 }
-
+.form-body {
+    background: #cff;
+    padding: 0.5%;
+}
 
 /* 
 * Universal Utility Classes 
@@ -100,9 +102,11 @@ header {
 }
 .row {
     background-color: #ffcb1e;
+    border-radius: 5px;
+    margin-bottom: 0.5em !important;
 }
 .tab-content {
-    padding: 0 1em;
+    padding: 1em;
 }
 
 /* 

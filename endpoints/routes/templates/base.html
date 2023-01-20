@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/picnic">
-    <link href="{{ url_for('static', filename='styles/logger.css') }}" rel="stylesheet">
+    <link href="{{ url_for('static', filename='styles/logger.css') }}?v={{ config.cache }}" rel="stylesheet">
     <link href="{{ url_for('static', filename='images/barbell.png') }}" rel="icon">
     <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
     {% block title %}
@@ -13,8 +13,8 @@
     {% endblock %}
 </head>
 <body>
-    <div class="nav"></div>
-        <nav class="demo">
+    <div class="nav">
+        <nav class="demo nav-bar">
             <a href="/log" class="brand">
                 <img class="logo" src="{{ url_for('static', filename='images/barbell.png') }}" />
                 <span>Workout Log</span>

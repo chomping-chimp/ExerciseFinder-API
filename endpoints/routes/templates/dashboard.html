@@ -12,22 +12,23 @@
         <label class="pseudo button toggle" for="tab-3">History</label>
         <div class="row">
             <div class="tab-content" id="tab-1-content">
-                <p>Log a workout</p>
-                <p>Saved Routines will be listed</p>
-                <p>You can pick from one of those</p>
+                <a class="button warning" href="/log/workout/new">&#43; Improvised Workout</a>
+                {% for item in config.templates %}
+                <a class="button">{{ item }}</a>
+                {% endfor %}
             </div>
       
-            <div>
-                <p>Edit a workout</p>
-                <p>You can edit existing ones</p>
-                <p>Or create whole new routines</p>
+            <div class="tab-content">
+                <a class="button warning" href="/log/template/create-new">&#43; New Routine</a>
+                {% for item in config.templates %}
+                <a class="button">{{ item }}</a>
+                {% endfor %}
             </div>
       
-            <div>
-                <p>Workout History</p>
-                <p>This will show you all</p>
-                <p>the documented routines</p>
-                <p>and some stats</p>
+            <div class="tab-content">
+                {% for item in config.history %}
+                <a class="button">{{ item.date }}: {{ item.template }}</a>
+                {% endfor %}
             </div>
         </div>
     </div>
