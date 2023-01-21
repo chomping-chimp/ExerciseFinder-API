@@ -7,6 +7,8 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/picnic">
     <link href="{{ url_for('static', filename='styles/logger.css') }}?v={{ config.cache }}" rel="stylesheet">
+    <script src="http://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+    <script src="{{ url_for('static', filename='src/form.js') }}"></script>
     <link href="{{ url_for('static', filename='images/barbell.png') }}" rel="icon">
     <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
     {% block title %}

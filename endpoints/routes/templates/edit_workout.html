@@ -1,31 +1,49 @@
-<!-- Protected Page -->
 {% extends "base_protected.html" %}
 
 {% block content %}
 <div class="compact form-body">
-    <h3><span class="label">Workout Template</span></h3>
-    <form action="/log/template/create-new" method="post" id="workout-form">
+    <h3><span class="label">Workout Editor</span></h3>
+    <form action="/log/template/create-new" method="post" id="workout-form" enctype="multipart/form-data">
         <div>
-            <label><input type="text" placeholder="Template Name"></label>
-            <label><input type="date" placeholder="Date"></label>
+            <label><input name="title" type="text" placeholder="Template Name"></label>
+            <label><input name="date" type="date" placeholder="Date"></label>
         </div>
-        <textarea placeholder="Description"></textarea>
+        <textarea name="notes" placeholder="Notes"></textarea>
 
-        <div>
-            <label><input type="text" placeholder="Exercise name"></label>
-            <!-- Need to make every set individual, so can log % and rir -->
-            <label><input type="number" placeholder="Sets" min="1" max="10"></label>
-            <label for="vol">Sets</label>
-            <input type="range" id="vol" name="vol" min="1" max="10">
-            <select>
-                <option>Metric</option>
-                <option>Reps</option>
-                <option>Time (s)</option>
-            </select>
-            <label for="quant">Quantity</label>
-            <input type="range" id="quant" name="quant" min="1" max="100">
-            <label><input type="number" placeholder="Rest Time (secs)" min="0" max="300"></label>
+        <label for="modal_1" class="button warning">&#43; Add Exercise</label>
+
+        <div class="modal">
+            <input id="modal_1" type="checkbox" />
+            <label for="modal_1" class="overlay"></label>
+            <article>
+                <section class="content">
+                    <label><input id="ex-name" type="text" placeholder="Exercise name"></label>
+                    <label><input id="ex-sets" type="number" placeholder="Sets" min="1" max="15"></label>
+                </section>
+                <footer>
+                    <a class="button" id="add-exercise">Add</a>
+                    <label for="modal_1" class="button dangerous">Cancel</label>
+                </footer>
+            </article>
         </div>
+        <div class="exercise bordered" hidden>
+            <label><input class="exercise-name" name="exercise" type="text" placeholder="Exercise name"></label>
+            <input class="set-counter" name="sets" hidden>
+            <div class="exercise-set" id="set-1" hidden>
+                <select id="quantLabel" name="quantLabel">
+                    <option>Metric</option>
+                    <option value="reps">Reps</option>
+                    <option value="time">Time (s)</option>
+                </select>
+                <label><input name="quantity" type="number" placeholder="Quantity" min="1" max="50"></label>
+                <label><input name="pct_1rm" type="number" placeholder="1RM %" min="1" max="100"></label>
+                <label><input name="rpe" type="number" placeholder="RPE" min="1" max="10" step="0.1"></label>
+                <label><input name="rest" type="number" placeholder="Rest Time (secs)" min="0" max="300"></label>
+                <a class="button error" id="remove-set">&#x26CC; Delete Set</a>
+            </div>
+            <div id="set-placeholder"></div>
+        </div>
+        <span id="exercise-placeholder"></span>
 
         <button type="submit" value="Submit">Save</button>
     </form>
