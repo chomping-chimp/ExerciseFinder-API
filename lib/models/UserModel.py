@@ -3,7 +3,7 @@ from werkzeug.security import generate_password_hash, check_password_hash
 
 class UserModel(BaseModel):
 
-    def __init__(self, username=None):
+    def __init__(self, username=None, user_id=None):
         super().__init__()
         self.username = username
         self.is_created = True if username else False
@@ -58,10 +58,25 @@ class UserModel(BaseModel):
 
         return password_auth and username_auth
 
-    def get_user_id(self):
+    def get_user_id(self, username=None):
+        
+        if not username:
+            username = self.username
         # Get user id
         with self.db('dict') as cursor:
-            cursor.execute("SELECT user_id from dashboard_users WHERE username = %s", (self.username,))
+            cursor.execute("SELECT user_id from dashboard_users WHERE username = %s", (username,))
             result = cursor.fetchone()
 
         return result['user_id']
+
+    def get_username(self, id=None):
+        
+        if not id:
+            id = self.user_id
+        # Get user id
+        with self.db('dict') as cursor:
+            print(id)
+            cursor.execute("SELECT username from dashboard_users WHERE user_id = %d", (id,))
+            result = cursor.fetchone()
+
+        return result['username']

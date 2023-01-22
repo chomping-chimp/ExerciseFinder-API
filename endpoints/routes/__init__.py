@@ -7,6 +7,7 @@ from .logger import log
 from .index import index
 
 app = Flask(__name__)
+app.secret_key = '93843hserj39sfsw3'
 app.register_blueprint(index)
 app.register_blueprint(exercise, url_prefix="/api")
 app.register_blueprint(activity, url_prefix="/api")

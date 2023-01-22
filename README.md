@@ -20,3 +20,11 @@ This project has a few pre-requisites:
 To work on this you will need to run a python virtual env. All the required packages are listed in the requirements.txt file.   
 Documentation to set up and start up virtual environment <a href="https://uoa-eresearch.github.io/eresearch-cookbook/recipe/2014/11/26/python-virtual-env/">here</a>   
 The Python version used in this project is 3.9
+
+
+### Notes
+- Add feature for Time under Tension
+- Clean up set interface
+- Caclulate load based off of 1rm data
+- Suggest load calculations if needed
+- fix table view when in desktop vs mobile

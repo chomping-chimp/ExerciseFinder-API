@@ -25,7 +25,12 @@ $(document).ready(function () {
         newExercise.insertBefore("#exercise-placeholder");
 
         for (let i=0; i<exerciseSets; i++) {
-            let newSet = newExercise.find(".exercise-set").first().clone(true);
+            var newSet;
+            if (i == 0) {
+                newSet = newExercise.find(".exercise-set").first();
+            } else {
+                newSet = newExercise.find(".exercise-set").first().clone(true);
+            }
             newSet.removeAttr('hidden');
             newSet.appendTo(`.exercise-${hash}`);
         }
