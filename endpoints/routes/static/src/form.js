@@ -50,18 +50,3 @@ function generateHash(string) {
     }
     return hash;
 }
-
-var setHTML = `
-    <div class="exercise-set" id="set-1" hidden>
-        <select id="quantLabel" name="quantLabel">
-            <option>Metric</option>
-            <option value="reps">Reps</option>
-            <option value="time">Time (s)</option>
-        </select>
-        <label><input name="quantity" type="number" placeholder="Quantity" min="1" max="50"></label>
-        <label><input name="pct_1rm" type="number" placeholder="1RM %" min="1" max="100"></label>
-        <label><input name="rpe" type="number" placeholder="RPE" min="1" max="10" step="0.1"></label>
-        <label><input name="rest" type="number" placeholder="Rest Time (secs)" min="0" max="300"></label>
-        <a class="button error" id="remove-set">&#x26CC; Delete Set</a>
-    </div>
-`

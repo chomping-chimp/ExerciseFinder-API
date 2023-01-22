@@ -55,8 +55,8 @@ class UserTemplateModel(UserModel):
             for x in range(sets):
                 # print(f"exercise - {exercise} set - {counter}")
                 exercise_dict['sets'].append({
-                    'label': raw_template['quantLabel'][counter],
-                    'quantity': raw_template['quantity'][counter],
+                    'unit': raw_template['unit'][counter],
+                    'count': raw_template['count'][counter],
                     'pct_1rm': raw_template['pct_1rm'][counter],
                     'rpe': raw_template['rpe'][counter],
                     'rest': raw_template['rest'][counter]

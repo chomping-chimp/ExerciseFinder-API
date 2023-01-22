@@ -36,8 +36,8 @@
             <table class="primary">
                 <thead>
                   <tr>
-                    <th>Num</th>
-                    <th>Label</th>
+                    <th>Count</th>
+                    <th>Unit</th>
                     <th>%1RM</th>
                     <th>RPE</th>
                     <th>Rest</th>
@@ -46,11 +46,11 @@
                 <tbody>
                     {% for set in exercise.sets %}
                     <tr>
-                        <td contenteditable="true">{{ set.quantity }}
-                            <input type="hidden" name="quantity" value="{{ set.quantity }}" />
+                        <td contenteditable="true">{{ set.count }}
+                            <input type="hidden" name="count" value="{{ set.count }}" />
                         </td>
-                        <td contenteditable="true">{{ set.label }}
-                            <input type="hidden" name="label" value="{{ set.label }}" />
+                        <td contenteditable="true">{{ set.unit }}
+                            <input type="hidden" name="unit" value="{{ set.unit }}" />
                         </td>
                         <td contenteditable="true">{{ set.pct_1rm }}
                             <input type="hidden" name="pct_1rm" value="{{ set.pct_1rm }}" />

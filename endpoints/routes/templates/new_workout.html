@@ -33,12 +33,12 @@
             <label><input class="exercise-name" name="exercise" type="text" placeholder="Exercise name"></label>
             <input class="set-counter" name="sets" hidden>
             <div class="exercise-set" id="set-1" hidden>
-                <select id="quantLabel" name="quantLabel">
-                    <option>Metric</option>
+                <select id="unitLabel" name="unitLabel">
+                    <option>Unit</option>
                     <option value="reps">Reps</option>
-                    <option value="time">Time (s)</option>
+                    <option value="sec">Time (s)</option>
                 </select>
-                <label><input name="quantity" type="number" placeholder="Quantity" min="1" max="50"></label>
+                <label><input name="count" type="number" placeholder="Count" min="1" max="50"></label>
                 <label><input name="pct_1rm" type="number" placeholder="1RM %" min="1" max="100"></label>
                 <label><input name="rpe" type="number" placeholder="RPE" min="1" max="10" step="0.1"></label>
                 <label><input name="rest" type="number" placeholder="Rest Time (secs)" min="0" max="300"></label>
