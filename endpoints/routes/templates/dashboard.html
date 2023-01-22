@@ -12,14 +12,14 @@
         <label class="pseudo button toggle" for="tab-3">History</label>
         <div class="row">
             <div class="tab-content" id="tab-1-content">
-                <a class="button warning" href="/log/workout/new">&#43; Improvised Workout</a>
+                <a class="button baby-blue" href="/log/workout/new">&#43; Improvised Workout</a>
                 {% for item in config.templates %}
                 <a class="button" href="/log/template/{{ item.id }}/log">{{ item.name }}</a>
                 {% endfor %}
             </div>
       
             <div class="tab-content">
-                <a class="button warning" href="/log/template/create-new">&#43; New Routine</a>
+                <a class="button baby-blue" href="/log/template/create-new">&#43; New Routine</a>
                 {% for item in config.templates %}
                 <a class="button" href="/log/template/{{ item.id }}/edit">{{ item.name }}</a>
                 {% endfor %}

@@ -28,4 +28,3 @@ The Python version used in this project is 3.9
 - Caclulate load based off of 1rm data
 - Suggest load calculations if needed
 - fix table view when in desktop vs mobile
-- count for reps/time and unit for the label so - count:10, unit:secs = 10 secs

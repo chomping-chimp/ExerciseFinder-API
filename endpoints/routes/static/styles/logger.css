@@ -2,7 +2,12 @@
 
 :root {
     --blue: #1e90ff;
-    --white: #ffffff;
+    --white: #E7EDEB;
+
+    --neon-blue: #2272FF;
+    --pitch-black: #1D1D1D;
+    --baby-blue: #7EC8E3;
+    --navy-blue: #000C66;
 
     --class1: #22209e;
     --class2: #fa702f;
@@ -11,6 +16,8 @@
 /* Define Global Font */
 body {
     font-family: 'Libre Franklin', sans-serif;
+    color: white;
+    background-color: var(--pitch-black);
 }
 footer p {
     width: 70%;
@@ -28,7 +35,7 @@ footer p {
     height: 3em;
 }
 .nav-bar {
-    background: var(--blue) !important;
+    background: var(--neon-blue) !important;
 }
 /* Style Image Components */
 img {
@@ -55,7 +62,7 @@ header {
     margin: 0;
 }
 .button {
-    background-color: var(--blue);
+    background-color: var(--neon-blue);
 }
 .item:hover,
 .item:active,
@@ -63,13 +70,35 @@ header {
     background: #cff;
 }
 .form-body {
-    background: rgb(194, 210, 182);
+    background: var(--navy-blue);
     padding: 2.5%;
 }
 .bordered {
     padding: 0.5em;
     border: 1px solid rgb(17, 157, 154);
     border-radius: 5ps;
+}
+.menu {
+    background-color: var(--neon-blue) !important;
+}
+:checked+.toggle {
+    box-shadow: none;
+    background-color: var(--neon-blue) !important;
+}
+.popup {
+    background-color: var(--navy-blue) !important;
+}
+
+tbody {
+    background-color: #00A5E9;
+}
+
+input, textarea, select {
+    background-color: var(--white);
+    color: var(--pitch-black);
+    border: var(--white) solid;
+
+    margin: .3em 0;
 }
 
 /* 
@@ -91,11 +120,8 @@ header {
     text-align: left;
 }
 
-.class-1 {
-    background: var(--class1) !important;
-}
-.class-2 {
-    background: var(--class2) !important;
+.baby-blue {
+    background: var(--baby-blue) !important;
 }
 
 .compact {
@@ -107,7 +133,7 @@ header {
     padding: 0;
 }
 .row {
-    background-color: #ffcb1e;
+    background-color: var(--navy-blue);
     border-radius: 5px;
     margin-bottom: 0.5em !important;
 }

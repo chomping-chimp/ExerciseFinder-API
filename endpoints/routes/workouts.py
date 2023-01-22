@@ -3,8 +3,6 @@ from lib.models.UserTemplateModel import UserTemplateModel
 from endpoints.helpers import RequestHelper
 from flask import Blueprint, render_template, session, request, redirect, url_for
 
-from lib.models.UserModel import UserModel
-
 workout = Blueprint('workout', __name__)
 response = RequestHelper()
 

@@ -1,16 +1,25 @@
 @import url('https://fonts.googleapis.com/css2?family=Libre+Franklin&display=swap');
-h1 {
+h1, h2 {
     text-align: center;
+    color: white;
 }
 body {
-    background-color: aquamarine;
-    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+    background-color: #1D1D1D;
+    font-family: 'Libre Franklin', sans-serif;
+}
+dt {
+    font-weight: bold;
+}
+dd {
+    margin: auto auto auto 1em;
 }
 .text-container {
+    background-color: #2272FF;
     margin: auto;
     margin-bottom: 0.5em;
     width: 80%;
-    padding: 10px;
-    border: black solid 3px;
+    padding: min(20px, 5%);
+    border: #2272FF solid 3px;
     border-radius: 10px;
 }
+
