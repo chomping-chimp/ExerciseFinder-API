@@ -1,0 +1,40 @@
+{% extends "base_protected.html" %}
+{% block extra_import %}
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
+<script src="{{ url_for('static', filename='src/form.js') }}"></script>
+{% endblock %}
+{% block content %}
+<div class="compact form-body">
+    <h3><span class="label">View Recorded Workout</span></h3>
+    <h4><span class="label">Date: {{ config.date.strftime('%m/%d/%y') }}</span></h4>
+    
+    {% for exercise in config.workout %}
+        <div class="exercise" style="overflow-x:auto;">
+            <h4>{{ exercise.name }}</h4>
+            <table class="primary">
+                <thead>
+                  <tr>
+                    <th>Count</th>
+                    <th>Unit</th>
+                    <th>Load</th>
+                    <th>RPE</th>
+                    <th>Rest</th>
+                  </tr>
+                </thead>
+                <tbody>
+                    {% for set in exercise.sets %}
+                    <tr>
+                        <td>{{ set.count }}</td>
+                        <td>{{ set.unit }}</td>
+                        <td>{{ set.load }}</td>
+                        <td>{{ set.rpe }}</td>
+                        <td>{{ set.rest }}</td>
+                    </tr>
+                    {% endfor %}
+                </tbody>
+              </table>
+        </div>
+    {% endfor %}
+    
+</div>
+{% endblock %}

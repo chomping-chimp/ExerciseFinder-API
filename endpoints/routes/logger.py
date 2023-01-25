@@ -1,6 +1,7 @@
 from endpoints.config import settings
 from endpoints.helpers import RequestHelper
 from flask import Blueprint, render_template, request, session, redirect, url_for
+from lib.models.UserLogModel import UserLogModel
 
 from lib.models.UserModel import UserModel
 from lib.models.UserTemplateModel import UserTemplateModel
@@ -66,30 +67,28 @@ Private Endpoints for logger section
 '''
 @log.route('/dashboard')
 def dashboard():
+    user_id = session.get('user_id')
+    ul_model = UserLogModel(user_id)
+    ut_model = UserTemplateModel(user_id)
+
     variables['title'] = 'Workout Log'
-    # Use UserTemplateModel for this
+    
     variables['templates'] = []
-    templates = UserTemplateModel(session.get('user_id')).get_user_template()
+    variables['history'] = []
+    
+    templates = ut_model.get_user_template()
     for template in templates:
         variables['templates'].append({
             'name': template['name'],
             'id': template['template_id']
         })
-    # UserLogModel for this
-    variables['history'] = [
-        {
-            'template': 'Upper Strength',
-            'date': '2023-01-19'
-        },
-        {
-            'template': 'Lower Strength',
-            'date': '2023-01-17'
-        },
-        {
-            'template': 'Full Body',
-            'date': '2023-01-16'
-        },
-    ]
+
+    records = ul_model.get_user_logs()
+    for record in records:
+        variables['history'].append({
+            'date': record['date'],
+            'id': record['workout_id']
+        })
     return render_template('dashboard.html', config=variables)
 
 @log.route('/logout')

@@ -1,7 +1,7 @@
 
 class Settings():
     YEAR = 2022
-    CACHE_VERSION = 6
-    contact_email = "help@jj-journal.com"
+    CACHE_VERSION = 7
+    contact_email = "help@exercise-api.com"
 
 settings = Settings()

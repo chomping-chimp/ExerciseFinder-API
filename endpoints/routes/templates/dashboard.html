@@ -27,7 +27,7 @@
       
             <div class="tab-content">
                 {% for item in config.history %}
-                <a class="button">{{ item.date }}: {{ item.template }}</a>
+                <a class="button" href="/log/history/{{ item.id }}/view">{{ item.date.strftime('%m/%d/%y') }}</a>
                 {% endfor %}
             </div>
         </div>

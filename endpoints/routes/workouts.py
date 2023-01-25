@@ -1,4 +1,5 @@
 from endpoints.config import settings
+from lib.models.UserLogModel import UserLogModel
 from lib.models.UserTemplateModel import UserTemplateModel
 from endpoints.helpers import RequestHelper
 from flask import Blueprint, render_template, session, request, redirect, url_for
@@ -38,14 +39,18 @@ def edit_template(template_id):
 
 @workout.route('template/<template_id>/log', methods=['POST', 'GET'])
 def log_workout(template_id):
+    user_id = session.get('user_id')
+    template = UserTemplateModel(user_id).get_user_template(template_id)
     if request.method == 'POST':
-        d = request.form.to_dict(flat=False)
-        # Use new model to get template from template ID
-        # then add the sets and reps to the existing data based on indexing
-        print(d)
+        ul_model = UserLogModel(user_id)
+
+        raw_form = request.form.to_dict(flat=False)
+        template_details = template[0]['template']
+
+        result = ul_model.add_load_to_template(template_details, raw_form['count'], raw_form['load'])
+        ul_model.create_new_log(result)
         return redirect(url_for('log.dashboard'))
     else:
-        user_id = session.get('user_id')
         template = UserTemplateModel(user_id).get_user_template(template_id)
 
         variables['template_id'] = template_id
@@ -53,3 +58,14 @@ def log_workout(template_id):
         variables['workout']['template'] = UserTemplateModel.convert_json(variables['workout']['template'])
 
         return render_template('log_workout.html', config=variables)
+
+@workout.route('/history/<workout_id>/view', methods=['GET'])
+def view_workout(workout_id):
+    user_id = session.get('user_id')
+    ul_model = UserLogModel(user_id)
+
+    workout = ul_model.get_user_logs(workout_id)
+    variables['date'] = workout[0]['date']
+    variables['workout'] = UserTemplateModel.convert_json(workout[0]['details'])
+
+    return render_template('view_workout.html', config=variables)

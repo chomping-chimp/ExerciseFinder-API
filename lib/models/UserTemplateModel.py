@@ -53,7 +53,6 @@ class UserTemplateModel(UserModel):
             sets = int(raw_template['sets'][index])
 
             for x in range(sets):
-                # print(f"exercise - {exercise} set - {counter}")
                 exercise_dict['sets'].append({
                     'unit': raw_template['unit'][counter],
                     'count': raw_template['count'][counter],
@@ -69,4 +68,7 @@ class UserTemplateModel(UserModel):
 
     @classmethod
     def convert_json(cls, json_data):
-        return json.loads(json_data)
+        if isinstance(json_data, str):
+            return json.loads(json_data)
+        else:
+            return json.dumps(json_data)

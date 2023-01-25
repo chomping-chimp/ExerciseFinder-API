@@ -7,7 +7,6 @@
 <div class="compact form-body">
     <h3><span class="label">{{ config.workout.name }}</span></h3>
     <form action="/log/template/{{ config.template_id }}/log" method="post" id="workout-form" enctype="multipart/form-data">
-        <label><input name="date" type="date" placeholder="Date"></label>
         <p>Notes: {{ config.workout.notes }}</p>
 
         <label for="modal_1" class="button warning">&#43; Add Exercise</label>
