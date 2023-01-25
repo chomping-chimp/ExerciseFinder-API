@@ -17,8 +17,12 @@ variables = {
 def create_new():
     if request.method == 'POST':
         user_id = session.get('user_id')
+        ut_model = UserTemplateModel(user_id)
+
         d = request.form.to_dict(flat=False)
-        UserTemplateModel(user_id).create_new_template(d)
+
+        template_id = ut_model.create_new_template(d)
+        ut_model.link_user_to_template(template_id=template_id)
         return redirect(url_for('log.dashboard', user_id=user_id))
     else:
         variables['title'] = 'Create New'
@@ -46,8 +50,9 @@ def log_workout(template_id):
 
         raw_form = request.form.to_dict(flat=False)
         template_details = template[0]['template']
-
+        # Add load from workout into existing template JSON
         result = ul_model.add_load_to_template(template_details, raw_form['count'], raw_form['load'])
+        # Log new workout for user
         ul_model.create_new_log(result)
         return redirect(url_for('log.dashboard'))
     else:

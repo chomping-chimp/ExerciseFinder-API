@@ -13,11 +13,15 @@ class UserTemplateModel(UserModel):
         where = "WHERE user_id = %(user_id)s"
         params = {'user_id': self.user_id}
         if template_id:
-            where += " AND template_id = %(template_id)s"
+            where += " AND t.template_id = %(template_id)s"
             params['template_id'] = template_id
         
         with self.db('dict') as cursor:
-            cursor.execute(f"SELECT * from user_template {where}", params=params)
+            cursor.execute(f"""
+                SELECT t.* FROM templates t
+                JOIN user_template_map utm ON utm.template_id = t.template_id
+                {where}
+            """, params=params)
             result = cursor.fetchall()
 
         return result
@@ -28,11 +32,19 @@ class UserTemplateModel(UserModel):
         
         with self.db() as cursor:
             cursor.execute("""
-                INSERT INTO user_template (name,user_id,notes,template,date_created) 
-                VALUES (%s, %s, %s, %s, NOW())
-            """, (template['title'], self.user_id, template['notes'], json.dumps(template['template'])))
+                INSERT INTO templates (name,notes,template,date_created) 
+                VALUES (%s, %s, %s, NOW())
+            """, (template['title'], template['notes'], json.dumps(template['template'])))
+            cursor.execute("SELECT MAX(template_id) AS template_id FROM templates")
+            return cursor.fetchone()[0]
+    
+    def link_user_to_template(self, template_id):
         
-        return template
+        with self.db() as cursor:
+            cursor.execute("""
+                INSERT INTO user_template_map (template_id,user_id) 
+                VALUES (%s, %s)
+            """, (template_id, self.user_id))
     
     def process_raw_template(self, raw_template):
         tidy_template = {
