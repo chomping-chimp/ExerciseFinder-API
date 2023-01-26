@@ -33,9 +33,8 @@
             <table class="primary">
                 <thead>
                   <tr>
-                    <th>Reps</th>
+                    <th>{{ exercise.sets[0].unit|capitalize }}</th>
                     <th>Load</th>
-                    <!-- <th>%1RM</th> -->
                     <th>RPE</th>
                     <th>Rest</th>
                   </tr>
@@ -51,7 +50,9 @@
                         </td>
                         <td>{{ set.rpe }}</td>
                         <td class="fixed">
+                            {% if set.rest != '' %}
                             <a class="button baby-blue">{{ set.rest }}</a>
+                            {% endif %}
                         </td>
                     </tr>
                     {% endfor %}
