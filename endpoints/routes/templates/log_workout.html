@@ -2,6 +2,7 @@
 {% block extra_import %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 <script src="{{ url_for('static', filename='src/form.js') }}"></script>
+<script src="{{ url_for('static', filename='src/timer.js') }}"></script>
 {% endblock %}
 {% block content %}
 <div class="compact form-body">
@@ -41,21 +42,16 @@
                 </thead>
                 <tbody>
                     {% for set in exercise.sets %}
-                    <tr>
+                    <tr class="center">
                         <td contenteditable="true">
-                            <input name="count" value="{{ set.count }}" />
+                            <input name="count" value="{{ set.count }}"/>
                         </td>
                         <td contenteditable="true">
                             <input name="load"/>
                         </td>
-                        <!-- <td contenteditable="false">{{ set.pct_1rm }}
-                            <input type="hidden" name="pct_1rm" value="{{ set.pct_1rm }}" />
-                        </td> -->
-                        <td contenteditable="false">{{ set.rpe }}
-                            <input type="hidden" name="rpe" value="{{ set.rpe }}" />
-                        </td>
-                        <td contenteditable="false">{{ set.rest }}
-                            <input type="hidden" name="rest" value="{{ set.rest }}" />
+                        <td>{{ set.rpe }}</td>
+                        <td class="fixed">
+                            <a class="button baby-blue">{{ set.rest }}</a>
                         </td>
                     </tr>
                     {% endfor %}

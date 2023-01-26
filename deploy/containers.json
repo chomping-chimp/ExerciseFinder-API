@@ -1,1 +1,1 @@
-{"flask": {"image": ":exercise-api.app-container.31", "ports": {"5000": "HTTP"}}}
+{"flask": {"image": ":exercise-api.app-container.32", "ports": {"5000": "HTTP"}}}

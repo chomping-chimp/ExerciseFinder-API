@@ -72,6 +72,7 @@ header {
 .form-body {
     background: var(--navy-blue);
     padding: 2.5%;
+    padding-bottom: 2rem;
 }
 .bordered {
     padding: 0.5em;
@@ -112,6 +113,11 @@ input, textarea, select {
     align-content: center;
     justify-content: center;
 }
+.fixed {
+    display:table-cell;
+    width: 70px;
+    min-width: 70px;
+}
 .no-border {
     border: none;
 }
@@ -119,7 +125,9 @@ input, textarea, select {
     padding: 0em 2em;
     text-align: left;
 }
-
+.greyed {
+    background-color: grey;
+}
 .baby-blue {
     background: var(--baby-blue) !important;
 }
@@ -156,6 +164,6 @@ input, textarea, select {
         padding: 0 1%;
     }
     td, th {
-        padding: .15em 1em .15em .3em
+        padding: .25rem;
     }
 }

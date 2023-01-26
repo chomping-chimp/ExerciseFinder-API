@@ -1,5 +1,12 @@
 
 $(document).ready(function () {
+    $(window).keydown(function(event){
+        if(event.keyCode == 13) {
+          event.preventDefault();
+          return false;
+        }
+    });
+    
     $("#add-set").click(function() {
         $(".exercise-set").first().clone(true).insertBefore("#set-placeholder");
         console.log(this);
