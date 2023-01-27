@@ -23,3 +23,106 @@ dd {
     border-radius: 10px;
 }
 
+.notification-container {
+    width: 300px;
+    height: auto;
+    position: fixed;
+    padding: 10px;
+    z-index: 1000000;
+}
+  
+.show-top-left {
+    top: 0;
+    left: 0;
+    text-align: right;
+}
+  
+.show-top-right {
+    top: 0;
+    right: 0;
+}
+  
+.show-bottom-left {
+    bottom: 0;
+    left: 0;
+}
+  
+  .show-bottom-right {
+    bottom: 0;
+    right: 0;
+  }
+  
+  .notification {
+    width: 250px;
+    padding: 10px;
+    margin-top: 10px;
+    font-weight: bold;
+    text-overflow: clip;
+    font-size: 0.7em;
+    animation-name: fade-in;
+    animation-duration: 2s;
+    animation-timing-function: ease-in-out;
+  }
+  
+  .success {
+    background-color: #2ecc40;
+    color: #ffffff;
+    border: 0.5rem outset #2ecc40;
+    border-radius: 5px;
+  }
+  
+  .danger {
+    background-color: #ff4136;
+    color: #ffffff;
+    border: 0.5rem outset #ff4136;
+    border-radius: 5px;
+  }
+  
+  .warning {
+    background-color: #ff851b;
+    color: #ffffff;
+    border: 0.5rem outset #ff851b;
+    border-radius: 5px;
+  }
+  
+  .info {
+    background-color: #add8e6;
+    color: #ffffff;
+    border: 0.5rem outset #add8e6;
+    border-radius: 5px;
+  }
+  
+  .hide {
+    display: none;
+  }
+  
+  .show-top-left > .notification > .close {
+    float: left;
+    cursor: pointer;
+  }
+  
+  .show-bottom-left > .notification > .close {
+    float: left;
+    cursor: pointer;
+  }
+  
+  .show-top-right > .notification > .close {
+    float: right;
+    cursor: pointer;
+  }
+  
+  .show-bottom-left > .notification > .close {
+    float: right;
+    cursor: pointer;
+  }
+  
+  @keyframes fade-in {
+    from {
+      opacity: 0;
+    }
+    to {
+      opacity: 1;
+    }
+  }
+  
+

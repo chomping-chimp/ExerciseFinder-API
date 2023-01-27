@@ -1,6 +1,6 @@
 from endpoints.config import settings
 from endpoints.helpers import RequestHelper
-from flask import Blueprint, render_template, request, session, redirect, url_for
+from flask import Blueprint, render_template, request, session, redirect, url_for, flash
 from lib.models.UserLogModel import UserLogModel
 
 from lib.models.UserModel import UserModel
@@ -39,8 +39,10 @@ def login():
             # set to session
             session['user_id'] = user_id
             session['username'] = user
+            flash('Login successful', 'success')
             return redirect(url_for('log.dashboard', user_id=user_id))
         else:
+            flash('Invalid password provided', 'danger')
             return redirect(url_for('log.login', name=user))
     else:
         # implement a user session system?
@@ -55,8 +57,10 @@ def signup():
         email = request.form['email']
         create_user = UserModel().create_new_user(user, password, email)
         if create_user:
+            flash('Account Created!', 'success')
             return redirect(url_for('log.login', name=user))
         else:
+            flash('Unable to create Account', 'danger')
             return redirect(url_for('log.signup', name=user))
     else:
         variables['title'] = 'Sign Up'
@@ -95,5 +99,6 @@ def dashboard():
 def logout():
     session.pop('user_id', None)
     session.pop('username', None)
+    flash('You have logged out', 'warning')
     return redirect(url_for('log.login'))
 
