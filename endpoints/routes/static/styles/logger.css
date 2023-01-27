@@ -77,7 +77,7 @@ header {
 .bordered {
     padding: 0.5em;
     border: 1px solid rgb(17, 157, 154);
-    border-radius: 5ps;
+    border-radius: 5px;
 }
 .menu {
     background-color: var(--neon-blue) !important;
@@ -88,6 +88,32 @@ header {
 }
 .popup {
     background-color: var(--navy-blue) !important;
+}
+.flex {
+    margin: 0;
+    width: 100%;
+    align-items: center;
+    justify-content: space-between !important;
+}
+table {
+    margin: 0.5rem
+}
+.pseudo-header p, .pseudo-row p {
+    margin: 0;
+    text-align: center;
+}
+.pseudo-row {
+    background: var(--blue);
+    justify-content: space-around !important;
+    padding-bottom: .2rem;
+}
+.pseudo-header {
+    background: var(--neon-blue);
+    justify-content: space-around !important;
+}
+
+footer, section {
+    border: none;
 }
 
 tbody {
@@ -126,10 +152,13 @@ input, textarea, select {
     text-align: left;
 }
 .greyed {
-    background-color: grey;
+    background-color: #808080;
 }
 .baby-blue {
     background: var(--baby-blue) !important;
+}
+.navy-blue {
+    background: var(--navy-blue) !important;
 }
 
 .compact {
@@ -138,7 +167,7 @@ input, textarea, select {
     margin: 0 auto;
 }
 .flex>* {
-    padding: 0;
+    padding: 0.2rem;
 }
 .row {
     background-color: var(--navy-blue);

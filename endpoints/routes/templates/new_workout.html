@@ -1,23 +1,41 @@
-{% extends "base_protected.html" %}
+{% extends "components/base_protected.html" %}
 {% block extra_import %}
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
 <script src="{{ url_for('static', filename='src/form.js') }}"></script>
 {% endblock %}
 {% block content %}
 <div class="compact form-body">
+    <div class="flex eight twelve-700">
+        <button onclick="history.back()">&#10094;</button>
+        <label for="tooltip_modal" class="button">&#8263;</label>
+    </div>
     <h3><span class="label">New Template</span></h3>
+    <div class="modal">
+        <input id="tooltip_modal" type="checkbox" />
+        <label for="tooltip_modal" class="overlay"></label>
+        <article>
+            <section class="content navy-blue">
+                Click "Add Exercise" to add exercises to your workout template.
+                To create supersets, name your exercises like "1A Bench", "1B Row", etc..
+                Enter rest time in seconds, with a max of 5 mins.
+            </section>
+            <footer class="navy-blue">
+                Click anywhere outside this box to exit
+            </footer>
+        </article>
+    </div>
     <form action="/log/template/create-new" method="post" id="workout-form" enctype="multipart/form-data">
-        <div>
+        <div class="flex two">
             <label><input name="title" type="text" placeholder="Template Name"></label>
             <label><input name="date" type="date" placeholder="Date"></label>
         </div>
         <textarea name="notes" placeholder="Notes"></textarea>
 
-        <label for="modal_1" class="button warning">&#43; Add Exercise</label>
+        <label for="add_exercise_modal" class="button warning">&#43; Add Exercise</label>
 
         <div class="modal">
-            <input id="modal_1" type="checkbox" />
-            <label for="modal_1" class="overlay"></label>
+            <input id="add_exercise_modal" type="checkbox" />
+            <label for="add_exercise_modal" class="overlay"></label>
             <article>
                 <section class="content">
                     <label><input id="ex-name" type="text" placeholder="Exercise name"></label>
@@ -25,7 +43,7 @@
                 </section>
                 <footer>
                     <a class="button" id="add-exercise">Add</a>
-                    <label for="modal_1" class="button dangerous">Cancel</label>
+                    <label for="add_exercise_modal" class="button dangerous">Cancel</label>
                 </footer>
             </article>
         </div>
@@ -38,10 +56,14 @@
                     <option value="reps">Reps</option>
                     <option value="sec">Time (s)</option>
                 </select>
-                <label><input name="count" type="number" placeholder="Count" min="1" max="50"></label>
-                <label><input name="pct_1rm" type="number" placeholder="1RM %" min="1" max="100"></label>
-                <label><input name="rpe" type="number" placeholder="RPE" min="1" max="10" step="0.1"></label>
-                <label><input name="rest" type="number" placeholder="Rest Time (secs)" min="0" max="300"></label>
+                <div class="flex two">
+                    <label><input name="count" type="number" placeholder="Count" min="1" max="50"></label>
+                    <label><input name="rest" type="number" placeholder="Rest (secs)" min="0" max="300"></label>
+                </div>
+                <div class="flex two">
+                    <label><input name="pct_1rm" type="number" placeholder="1RM %" min="1" max="100"></label>
+                    <label><input name="rpe" type="number" placeholder="RPE" min="1" max="10" step="0.1"></label>
+                </div>
                 <a class="button error" id="remove-set">&#x26CC; Delete Set</a>
             </div>
             <div id="set-placeholder"></div>

@@ -41,7 +41,7 @@ $(document).ready(function () {
             newSet.removeAttr('hidden');
             newSet.appendTo(`.exercise-${hash}`);
         }
-        $('#modal_1').prop("checked", false);
+        $('#add_exercise_modal').prop("checked", false);
         return false;
     });
 });

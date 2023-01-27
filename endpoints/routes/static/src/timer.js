@@ -2,7 +2,7 @@ $(document).ready(function(){
     let timer;
     let timer_on = 0;
 
-    $("td a").click(function() {
+    $("div a").click(function() {
         let restTimer = $(this);
         let restTime = restTimer.text();
         let originalTime = restTime;
