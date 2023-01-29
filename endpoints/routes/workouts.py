@@ -32,11 +32,14 @@ def create_new():
 @workout.route('template/<template_id>/edit', methods=['POST', 'GET'])
 def edit_template(template_id):
     if request.method == 'POST':
-        pass
+        raw_form = request.form.to_dict(flat=False)
+        print(raw_form)
+        return redirect(url_for('log.dashboard'))
     else:
         user_id = session.get('user_id')
         template = UserTemplateModel(user_id).get_user_template(template_id)
 
+        variables['template_id'] = template_id
         variables['workout'] = template[0]
         variables['workout']['template'] = UserTemplateModel.convert_json(variables['workout']['template'])
 

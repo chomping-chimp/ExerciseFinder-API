@@ -63,34 +63,6 @@ dd {
     animation-timing-function: ease-in-out;
   }
   
-  .success {
-    background-color: #2ecc40;
-    color: #ffffff;
-    border: 1px solid #2ecc40;
-    border-radius: 5px;
-  }
-  
-  .danger {
-    background-color: #ff4136;
-    color: #ffffff;
-    border: 1px solid #ff4136;
-    border-radius: 5px;
-  }
-  
-  .warning {
-    background-color: #ff851b;
-    color: #ffffff;
-    border: 1px solid #ff851b;
-    border-radius: 5px;
-  }
-  
-  .info {
-    background-color: #add8e6;
-    color: #ffffff;
-    border: 1px solid #add8e6;
-    border-radius: 5px;
-  }
-  
   .hide {
     display: none;
   }
