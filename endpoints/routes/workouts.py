@@ -23,7 +23,7 @@ def create_new():
 
         template_id = ut_model.create_new_template(d)
         ut_model.link_user_to_template(template_id=template_id)
-        flash('Created template successfully', 'success')
+        flash('Created template successfully', 'ok')
         return redirect(url_for('log.dashboard', user_id=user_id))
     else:
         variables['title'] = 'Create New'
@@ -58,7 +58,7 @@ def log_workout(template_id):
         result = ul_model.add_load_to_template(template_details, raw_form['count'], raw_form['load'])
         # Log new workout for user
         ul_model.create_new_log(result)
-        flash('Workout logged, great job!', 'success')
+        flash('Workout logged, great job!', 'ok')
         return redirect(url_for('log.dashboard'))
     else:
         template = UserTemplateModel(user_id).get_user_template(template_id)

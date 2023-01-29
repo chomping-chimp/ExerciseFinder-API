@@ -24,6 +24,7 @@ dd {
 }
 
 .notification-container {
+    width: 300px;
     height: auto;
     position: fixed;
     padding: 10px;
@@ -61,6 +62,34 @@ dd {
     animation-name: fade-in;
     animation-duration: 2s;
     animation-timing-function: ease-in-out;
+  }
+  
+  .ok {
+    background-color: #05ad19;
+    color: #ffffff;
+    border: 0.5rem solid #05ad19;
+    border-radius: 5px;
+  }
+  
+  .error {
+    background-color: #f8190d;
+    color: #ffffff;
+    border: 0.5rem solid #f8190d;
+    border-radius: 5px;
+  }
+  
+  .warn {
+    background-color: #ca710b;
+    color: #ffffff;
+    border: 0.5rem solid #ca710b;
+    border-radius: 5px;
+  }
+  
+  .notice {
+    background-color: #add8e6;
+    color: #ffffff;
+    border: 0.5rem solid #add8e6;
+    border-radius: 5px;
   }
   
   .hide {

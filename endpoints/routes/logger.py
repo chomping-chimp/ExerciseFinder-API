@@ -39,10 +39,10 @@ def login():
             # set to session
             session['user_id'] = user_id
             session['username'] = user
-            flash('Login successful', 'success')
+            flash('Login successful', 'ok')
             return redirect(url_for('log.dashboard', user_id=user_id))
         else:
-            flash('Invalid password provided', 'danger')
+            flash('Invalid password provided', 'error')
             return redirect(url_for('log.login', name=user))
     else:
         # implement a user session system?
@@ -57,10 +57,10 @@ def signup():
         email = request.form['email']
         create_user = UserModel().create_new_user(user, password, email)
         if create_user:
-            flash('Account Created!', 'success')
+            flash('Account Created!', 'ok')
             return redirect(url_for('log.login', name=user))
         else:
-            flash('Unable to create Account', 'danger')
+            flash('Unable to create Account', 'error')
             return redirect(url_for('log.signup', name=user))
     else:
         variables['title'] = 'Sign Up'
@@ -99,6 +99,6 @@ def dashboard():
 def logout():
     session.pop('user_id', None)
     session.pop('username', None)
-    flash('You have logged out', 'warning')
+    flash('You have logged out', 'warn')
     return redirect(url_for('log.login'))
 
