@@ -45,6 +45,8 @@
                         <p>{{ set.rpe }}</p>
                         {% if set.rest != '' %}
                         <a class="button baby-blue">{{ set.rest }}</a>
+                        {% else %}
+                        <p>0</p>
                         {% endif %}
                     </div>
                 {% endfor %}

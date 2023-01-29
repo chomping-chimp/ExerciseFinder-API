@@ -23,7 +23,7 @@
         </article>
     </div>
     <h3><span class="label">Workout Editor</span></h3>
-    <form action="/log/template/create-new" method="post" id="workout-form" enctype="multipart/form-data">
+    <form action="/log/template/{{ config.template_id }}/edit" method="post" id="workout-form" enctype="multipart/form-data">
         <div>
             <label><input name="title" type="text" value="{{ config.workout.name }}"></label>
             <label><input name="date" type="date" placeholder="Date"></label>
@@ -49,7 +49,9 @@
 
         {% for exercise in config.workout.template %}
             <div class="exercise" style="overflow-x:auto;">
-                <h4>{{ exercise.name }}</h4>
+                <h4 contenteditable="true">{{ exercise.name }}
+                    <input type="hidden" name="exercise" value="{{ exercise.name }}"/>
+                </h4>
                 <div class="flex five pseudo-header">
                     <p>COUNT</p>
                     <p>UNIT</p>

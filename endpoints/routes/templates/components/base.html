@@ -10,8 +10,14 @@
     <link href="{{ url_for('static', filename='images/barbell.png') }}" rel="icon">
     <link rel="manifest" href="{{ url_for('static', filename='manifest.json') }}">
     <script>
-        function closeDiv(spn) {
-            spn.parentNode.style.display = "none";
+        window.setTimeout("closeAlert();", 3000);
+        function closeAlert(){
+            notifications = document.getElementsByClassName("notification")
+            if (notifications.length > 0) {
+                for(var i=0, len=notifications.length; i<len; i++) {
+                    notifications[i].style["display"] = "none";
+                }
+            }
         }
     </script>
     {% block title %}
@@ -38,9 +44,7 @@
     </div>
     <div class="notification-container show-bottom-right">
         {% for category, message in get_flashed_messages(with_categories=true) %}
-            <div class="notification {{ category }}">
-                <span onclick="closeDiv(this)">&#10006;</span> {{ message }}
-            </div>
+            <div class="notification {{ category }}">{{ message }}</div>
         {% endfor %}
     </div>
     {% block content %}
