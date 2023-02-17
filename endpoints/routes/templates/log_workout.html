@@ -35,14 +35,14 @@
                 <div class="flex five pseudo-header">
                     <p>{{ exercise.sets[0].unit|upper }}</p>
                     <p>LOAD</p>
-                    <p>RPE</p>
+                    <p>1RM%/RPE</p>
                     <p>REST</p>
                 </div>
                 {% for set in exercise.sets %}
                     <div class="flex five pseudo-row">
                         <input name="count" value="{{ set.count }}"/>
                         <input name="load"/>
-                        <p>{{ set.rpe }}</p>
+                        <p>{{ set.pct_1rm }}/{{ set.rpe }}</p>
                         {% if set.rest != '' %}
                         <a class="button baby-blue">{{ set.rest }}</a>
                         {% else %}
