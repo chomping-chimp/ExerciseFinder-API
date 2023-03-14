@@ -1,8 +1,4 @@
 {% extends "components/base_protected.html" %}
-{% block extra_import %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-<script src="{{ url_for('static', filename='src/form.js') }}?v={{ config.cache }}"></script>
-{% endblock %}
 {% block content %}
 <div class="compact form-body">
     <div class="flex eight twelve-700">
@@ -24,28 +20,6 @@
     </div>
     <h3><span class="label">View Recorded Workout</span></h3>
     <h4><span class="label">Date: {{ config.date.strftime('%m/%d/%y') }}</span></h4>
-    
-    {% for exercise in config.workout %}
-        <div class="exercise" style="overflow-x:auto;">
-            <h4>{{ exercise.name }}</h4>
-            <div class="flex five pseudo-header">
-                <p>Count</p>
-                <p>Unit</p>
-                <p>Load</p>
-                <p>RPE</p>
-                <p>Rest</p>
-            </div>
-            {% for set in exercise.sets %}
-                <div class="flex five pseudo-row">
-                    <p>{{ set.count }}</p>
-                    <p>{{ set.unit }}</p>
-                    <p>{{ set.load }}</p>
-                    <p>{{ set.rpe }}</p>
-                    <p>{{ set.rest }}</p>
-                </div>
-            {% endfor %}
-        </div>
-    {% endfor %}
-    
+    <textarea name="template" class="template-body" readonly>{{ config.details }}</textarea>
 </div>
 {% endblock %}

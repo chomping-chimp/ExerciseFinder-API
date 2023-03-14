@@ -18,9 +18,8 @@ def create_new():
     if request.method == 'POST':
         user_id = session.get('user_id')
         ut_model = UserTemplateModel(user_id)
-
+        
         d = request.form.to_dict(flat=False)
-
         template_id = ut_model.create_new_template(d)
         ut_model.link_user_to_template(template_id=template_id)
         flash('Created template successfully', 'ok')
@@ -32,9 +31,17 @@ def create_new():
 @workout.route('template/<template_id>/edit', methods=['POST', 'GET'])
 def edit_template(template_id):
     if request.method == 'POST':
+        user_id = session.get('user_id')
         raw_form = request.form.to_dict(flat=False)
-        print(raw_form)
-        return redirect(url_for('log.dashboard'))
+        ut_model = UserTemplateModel(user_id)
+        
+        d = request.form.to_dict(flat=False)
+        template_id = ut_model.update_template(template_id, raw_form)
+        if template_id:
+            flash('Created template successfully', 'ok')
+        else:
+            flash('Error updating routine', 'error')
+        return redirect(url_for('log.dashboard', user_id=user_id))
     else:
         user_id = session.get('user_id')
         template = UserTemplateModel(user_id).get_user_template(template_id)
@@ -53,9 +60,7 @@ def log_workout(template_id):
         ul_model = UserLogModel(user_id)
 
         raw_form = request.form.to_dict(flat=False)
-        template_details = template[0]['template']
-        # Add load from workout into existing template JSON
-        result = ul_model.add_load_to_template(template_details, raw_form['count'], raw_form['load'])
+        result = ul_model.extract_from_text(raw_form['workout'][0])
         # Log new workout for user
         ul_model.create_new_log(result)
         flash('Workout logged, great job!', 'ok')
@@ -77,5 +82,23 @@ def view_workout(workout_id):
     workout = ul_model.get_user_logs(workout_id)
     variables['date'] = workout[0]['date']
     variables['workout'] = UserTemplateModel.convert_json(workout[0]['details'])
+    try:
+        text = []
+        for exercise in variables['workout']:
+            text.append(f"{exercise['name']}")
+            text.append(exercise['rep_scheme'])
+            for set in exercise['sets']:
+                if set != '':
+                    text.append(set)
+
+        variables['details'] = "\n".join(text)
+    except:
+        text = []
+        for exercise in variables['workout']:
+            text.append(f"{exercise['name']}")
+            for set in exercise['sets']:
+                text.append(f"{set['load']}x{set['count']}")
+
+        variables['details'] = "\n".join(text)
 
     return render_template('view_workout.html', config=variables)

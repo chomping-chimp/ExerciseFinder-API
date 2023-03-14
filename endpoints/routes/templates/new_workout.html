@@ -1,8 +1,4 @@
 {% extends "components/base_protected.html" %}
-{% block extra_import %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-<script src="{{ url_for('static', filename='src/form.js') }}?v={{ config.cache }}"></script>
-{% endblock %}
 {% block content %}
 <div class="compact form-body">
     <div class="flex eight twelve-700">
@@ -15,9 +11,9 @@
         <label for="tooltip_modal" class="overlay"></label>
         <article>
             <section class="content navy-blue">
-                Click "Add Exercise" to add exercises to your workout template.
-                To create supersets, name your exercises like "1A Bench", "1B Row", etc..
-                Enter rest time in seconds, with a max of 5 mins.
+                Add Exercises using <code>#Exercise</code>, and specify a rep scheme inside <code>[]</code> brackets.
+                Generic rep scheme would be <code>sets x reps @ weight OR % OR RPE</code>. You can add in 
+                a cluster set using <code>reps/x</code> denoting the number of sub sets.
             </section>
             <footer class="navy-blue">
                 Click anywhere outside this box to exit
@@ -27,51 +23,10 @@
     <form action="/log/template/create-new" method="post" id="workout-form" enctype="multipart/form-data">
         <div class="flex two">
             <label><input name="title" type="text" placeholder="Template Name"></label>
-            <label><input name="date" type="date" placeholder="Date"></label>
         </div>
         <textarea name="notes" placeholder="Notes"></textarea>
-
-        <label for="add_exercise_modal" class="button warning">&#43; Add Exercise</label>
-
-        <div class="modal">
-            <input id="add_exercise_modal" type="checkbox" />
-            <label for="add_exercise_modal" class="overlay"></label>
-            <article>
-                <section class="content">
-                    <label><input id="ex-name" type="text" placeholder="Exercise name"></label>
-                    <label><input id="ex-sets" type="number" placeholder="Sets" min="1" max="15"></label>
-                </section>
-                <footer>
-                    <a class="button" id="add-exercise">Add</a>
-                    <label for="add_exercise_modal" class="button dangerous">Cancel</label>
-                </footer>
-            </article>
-        </div>
-        <div class="exercise bordered" hidden>
-            <label><input class="exercise-name" name="exercise" type="text" placeholder="Exercise name"></label>
-            <input class="set-counter" name="sets" hidden>
-            <div class="exercise-set" id="set-1" hidden>
-                <select id="unitLabel" name="unit">
-                    <option>Unit</option>
-                    <option value="reps">Reps</option>
-                    <option value="sec">Time (s)</option>
-                </select>
-                <div class="flex two">
-                    <label><input name="count" type="number" placeholder="Count" min="1" max="50"></label>
-                    <label><input name="rest" type="number" placeholder="Rest (secs)" min="0" max="300"></label>
-                </div>
-                <div class="flex two">
-                    <label><input name="pct_1rm" type="number" placeholder="1RM %" min="1" max="100"></label>
-                    <label><input name="rpe" type="number" placeholder="RPE" min="1" max="10" step="0.1"></label>
-                </div>
-                <a class="button error" id="remove-set">&#x26CC; Delete Set</a>
-            </div>
-            <div id="set-placeholder"></div>
-        </div>
-        <span id="exercise-placeholder"></span>
-
+        <textarea name="template" placeholder="Details" class="template-body"></textarea>
         <button type="submit" value="Submit">Save</button>
     </form>
-    
 </div>
 {% endblock %}

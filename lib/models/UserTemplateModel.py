@@ -23,7 +23,6 @@ class UserTemplateModel(UserModel):
                 {where}
             """, params=params)
             result = cursor.fetchall()
-
         return result
 
     def create_new_template(self, raw_template):
@@ -37,6 +36,17 @@ class UserTemplateModel(UserModel):
             """, (template['title'], template['notes'], json.dumps(template['template'])))
             cursor.execute("SELECT MAX(template_id) AS template_id FROM templates")
             return cursor.fetchone()[0]
+        
+    def update_template(self, template_id, raw_template):
+        template = self.process_raw_template(raw_template)
+        
+        with self.db() as cursor:
+            cursor.execute("""
+                UPDATE templates
+                SET name=%s, notes=%s, template=%s
+                WHERE template_id=%s
+            """, (template['title'], template['notes'], json.dumps(template['template']), template_id))
+            return template_id
     
     def link_user_to_template(self, template_id):
         
@@ -49,33 +59,10 @@ class UserTemplateModel(UserModel):
     def process_raw_template(self, raw_template):
         tidy_template = {
             'title': raw_template['title'][0],
-            'date': raw_template['date'][0],
             'notes': raw_template['notes'][0],
-            'template': []
+            'template': raw_template['template'][0]
         }
-
-        raw_template['exercise'].pop(0)
-        counter = 1
-
-        for index, exercise in enumerate(raw_template['exercise'], start=1):
-            exercise_dict = {
-                'name': exercise,
-                'sets': []
-            }
-            sets = int(raw_template['sets'][index])
-
-            for x in range(sets):
-                exercise_dict['sets'].append({
-                    'unit': raw_template['unit'][counter],
-                    'count': raw_template['count'][counter],
-                    'pct_1rm': raw_template['pct_1rm'][counter],
-                    'rpe': raw_template['rpe'][counter],
-                    'rest': raw_template['rest'][counter]
-                })
-
-                counter += 1
-
-            tidy_template['template'].append(exercise_dict)
+        # TODO: better process it here w regex
         return tidy_template
 
     @classmethod

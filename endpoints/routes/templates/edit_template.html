@@ -1,8 +1,4 @@
 {% extends "components/base_protected.html" %}
-{% block extra_import %}
-<script src="https://ajax.googleapis.com/ajax/libs/jquery/1.7.1/jquery.min.js" type="text/javascript"></script>
-<script src="{{ url_for('static', filename='src/form.js') }}?v={{ config.cache }}"></script>
-{% endblock %}
 {% block content %}
 <div class="compact form-body">
     <div class="flex eight twelve-700">
@@ -14,8 +10,9 @@
         <label for="modal_1" class="overlay"></label>
         <article>
             <section class="content navy-blue">
-                Click on the fields in the exercise tables below to edit your
-                workout. You can also add new exercises if needed.
+                Add Exercises using <code>#Exercise</code>, and specify a rep scheme inside <code>[]</code> brackets.
+                Generic rep scheme would be <code>sets x reps @ weight OR % OR RPE</code>. You can add in 
+                a cluster set using <code>reps/x</code> denoting the number of sub sets.
             </section>
             <footer class="navy-blue">
                 Click anywhere outside this box to exit
@@ -24,63 +21,11 @@
     </div>
     <h3><span class="label">Workout Editor</span></h3>
     <form action="/log/template/{{ config.template_id }}/edit" method="post" id="workout-form" enctype="multipart/form-data">
-        <div>
-            <label><input name="title" type="text" value="{{ config.workout.name }}"></label>
-            <label><input name="date" type="date" placeholder="Date"></label>
+        <div class="flex two">
+            <label><input name="title" type="text" placeholder="Template Name" value="{{ config.workout.name }}"></label>
         </div>
-        <textarea name="notes">{{ config.workout.notes }}</textarea>
-
-        <label for="add_exercise_modal" class="button warning">&#43; Add Exercise</label>
-
-        <div class="modal">
-            <input id="add_exercise_modal" type="checkbox" />
-            <label for="add_exercise_modal" class="overlay"></label>
-            <article class="popup">
-                <section class="content">
-                    <label><input id="ex-name" type="text" placeholder="Exercise name"></label>
-                    <label><input id="ex-sets" type="number" placeholder="Sets" min="1" max="15"></label>
-                </section>
-                <footer>
-                    <a class="button" id="add-exercise">Add</a>
-                    <label for="add_exercise_modal" class="button dangerous">Cancel</label>
-                </footer>
-            </article>
-        </div>
-
-        {% for exercise in config.workout.template %}
-            <div class="exercise" style="overflow-x:auto;">
-                <h4 contenteditable="true">{{ exercise.name }}
-                    <input type="hidden" name="exercise" value="{{ exercise.name }}"/>
-                </h4>
-                <div class="flex five pseudo-header">
-                    <p>COUNT</p>
-                    <p>UNIT</p>
-                    <p>%1RM</p>
-                    <p>RPE</p>
-                    <p>REST</p>
-                </div>
-                {% for set in exercise.sets %}
-                    <div class="flex five pseudo-row">
-                        <p contenteditable="true">{{ set.count }}
-                            <input type="hidden" name="count" value="{{ set.count }}"/>
-                        </p>
-                        <p contenteditable="true">{{ set.unit }}
-                            <input type="hidden" name="unit" value="{{ set.unit }}" />
-                        </p>
-                        <p contenteditable="true">{{ set.pct_1rm }}
-                            <input type="hidden" name="pct_1rm" value="{{ set.pct_1rm }}" />
-                        </p>
-                        <p contenteditable="true">{{ set.rpe }}
-                            <input type="hidden" name="rpe" value="{{ set.rpe }}" />
-                        </p>
-                        <p contenteditable="true">{{ set.rest }}
-                            <input type="hidden" name="rest" value="{{ set.rest }}" />
-                        </p>
-                    </div>
-                {% endfor %}
-            </div>
-        {% endfor %}
-        <span id="exercise-placeholder"></span>
+        <textarea name="notes" placeholder="Notes">{{ config.workout.notes }}</textarea>
+        <textarea name="template" placeholder="Details" class="template-body">{{ config.workout.template }}</textarea>
         <button type="submit" value="Submit">Save</button>
     </form>
     
