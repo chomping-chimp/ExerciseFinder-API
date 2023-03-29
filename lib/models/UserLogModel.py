@@ -1,5 +1,4 @@
 import json
-import re
 from endpoints.helpers import RequestHelper
 from .UserModel import UserModel
 
@@ -17,7 +16,7 @@ class UserLogModel(UserModel):
             params['workout_id'] = workout_id
         
         with self.db('dict') as cursor:
-            cursor.execute(f"SELECT * from workout_log {where}", params=params)
+            cursor.execute(f"SELECT * from workout_log {where} ORDER BY workout_id DESC", params=params)
             result = cursor.fetchall()
 
         return result
